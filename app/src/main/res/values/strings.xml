@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">REIM</string>
+
+    <array name="main_items">
+        <item>Actividad 2</item>
+        <item>Actividad 1</item>
+    </array>
+
+    <array name="dummy_items">
+        <item>manzana</item>
+        <item>hamburguesa</item>
+        <item>queso</item>
+        <item>pizza</item>
+        <item>champiñon</item>
+        <item>leche</item>
+        <item>sandía</item>
+        <item>pepino</item>
+        <item>salame</item>
+        <item>tocino</item>
+    </array>
+</resources>
