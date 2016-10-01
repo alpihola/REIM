@@ -6,7 +6,7 @@
         <item>Actividad 1</item>
     </array>
 
-    <array name="dummy_items">
+    <array name="alimentos">
         <item>manzana</item>
         <item>hamburguesa</item>
         <item>queso</item>
@@ -17,5 +17,18 @@
         <item>pepino</item>
         <item>salame</item>
         <item>tocino</item>
+    </array>
+
+    <array name="elementos_bomberos">
+        <item>manguera</item>
+        <item>sirena</item>
+        <item>carro</item>
+        <item>lanza-agua</item>
+        <item>equipo</item>
+        <item>vestimenta</item>
+        <item>chofer</item>
+        <item>abrir puertas</item>
+        <item>ver mapa</item>
+        <item>bocina</item>
     </array>
 </resources>

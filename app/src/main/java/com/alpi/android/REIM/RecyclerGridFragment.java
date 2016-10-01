@@ -1,8 +1,12 @@
 package com.alpi.android.REIM;
 
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -30,11 +34,12 @@ public class RecyclerGridFragment extends Fragment implements OnStartDragListene
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final RecyclerListAdapter adapter = new RecyclerListAdapter(getActivity(), this);
+        final RecyclerGridAdapter adapter = new RecyclerGridAdapter(getActivity(), this);
 
         RecyclerView recyclerView = (RecyclerView) view;
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
+        recyclerView.setBackground(ContextCompat.getDrawable(recyclerView.getContext(), R.drawable.fondo_cocina));
 
         final int spanCount = getResources().getInteger(R.integer.grid_columns);
         final GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), spanCount);

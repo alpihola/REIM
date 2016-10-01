@@ -40,5 +40,4 @@ public class MainActivity extends  ActionBarActivity implements MainFragment.OnL
                 .addToBackStack(null)
                 .commit();
     }
-
 }

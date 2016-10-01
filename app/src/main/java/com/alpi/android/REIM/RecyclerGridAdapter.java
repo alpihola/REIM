@@ -26,16 +26,16 @@ import com.alpi.android.REIM.helper.OnStartDragListener;
  *
  */
 
-public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapter.ItemViewHolder>
+public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerGridAdapter.ItemViewHolder>
         implements ItemTouchHelperAdapter {
 
-    private final List<String> mItems = new ArrayList<>();
+    private final List<String> mItems2 = new ArrayList<>();
 
-    private final OnStartDragListener mDragStartListener;
+    private final OnStartDragListener mDragStartListener2;
 
-    public RecyclerListAdapter(Context context, OnStartDragListener dragStartListener) {
-        mDragStartListener = dragStartListener;
-        mItems.addAll(Arrays.asList(context.getResources().getStringArray(R.array.elementos_bomberos)));
+    public RecyclerGridAdapter(Context context, OnStartDragListener dragStartListener) {
+        mDragStartListener2 = dragStartListener;
+        mItems2.addAll(Arrays.asList(context.getResources().getStringArray(R.array.alimentos)));
     }
 
     @Override
@@ -47,14 +47,14 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
 
     @Override
     public void onBindViewHolder(final ItemViewHolder holder, int position) {
-        holder.textView.setText(mItems.get(position));
+        holder.textView.setText(mItems2.get(position));
 
         // Start a drag whenever the handle view it touched
         holder.handleView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
-                    mDragStartListener.onStartDrag(holder);
+                    mDragStartListener2.onStartDrag(holder);
                 }
                 return false;
             }
@@ -63,20 +63,20 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
 
     @Override
     public void onItemDismiss(int position) {
-        mItems.remove(position);
+        mItems2.remove(position);
         notifyItemRemoved(position);
     }
 
     @Override
     public boolean onItemMove(int fromPosition, int toPosition) {
-        Collections.swap(mItems, fromPosition, toPosition);
+        Collections.swap(mItems2, fromPosition, toPosition);
         notifyItemMoved(fromPosition, toPosition);
         return true;
     }
 
     @Override
     public int getItemCount() {
-        return mItems.size();
+        return mItems2.size();
     }
 
     /**

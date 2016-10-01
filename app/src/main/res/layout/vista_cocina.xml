@@ -2,12 +2,10 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_container"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:id="@+id/vista_cocina">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -19,8 +17,9 @@
 
     <FrameLayout
         android:id="@+id/content"
-        android:background="@drawable/fondo_main"
+        android:background="@drawable/fondo_cocina"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        />
 
 </LinearLayout>
