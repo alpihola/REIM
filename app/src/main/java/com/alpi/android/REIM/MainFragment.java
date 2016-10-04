@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.Collections;
+import java.util.Random;
+
 public class MainFragment extends ListFragment {
 
     public interface OnListItemClickListener {

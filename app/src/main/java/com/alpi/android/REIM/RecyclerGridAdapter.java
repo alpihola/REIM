@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import com.alpi.android.REIM.helper.ItemTouchHelperAdapter;
 import com.alpi.android.REIM.helper.ItemTouchHelperViewHolder;
@@ -36,6 +37,8 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerGridAdapte
     public RecyclerGridAdapter(Context context, OnStartDragListener dragStartListener) {
         mDragStartListener2 = dragStartListener;
         mItems2.addAll(Arrays.asList(context.getResources().getStringArray(R.array.alimentos)));
+        long seed = System.nanoTime();
+        Collections.shuffle(mItems2, new Random(seed));
     }
 
     @Override
