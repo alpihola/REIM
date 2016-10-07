@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_container"
+    android:id="@+id/mapa_este"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -19,21 +19,10 @@
 
     <FrameLayout
         android:id="@+id/content"
+        android:background="@drawable/fondo_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <Button
-            android:layout_width="86dp"
-            android:layout_height="75dp"
-            android:layout_margin="@dimen/abc_text_size_display_3_material"
-            android:background="@drawable/boton_accion"
-            android:id="@+id/button" />
-
-        <TextView
-            android:text="Login"
-            android:layout_width="117dp"
-            android:layout_height="34dp"
-            android:id="@+id/textView" />
     </FrameLayout>
 
 </LinearLayout>
