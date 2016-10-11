@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/fondo_mapa_norte"
+    tools:context=".MapaNorte">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <TextView
+        android:text="Mapa Norte"
+        android:layout_width="117dp"
+        android:layout_height="34dp"
+        android:id="@+id/textView"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="92dp"
+        android:layout_height="101dp"
+        android:background="@drawable/boton_accion"
+        android:id="@+id/botonIrAlEste"
+        android:rotation="135"
+        android:layout_alignBottom="@+id/botonIrAlOeste"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+    <Button
+        android:layout_width="92dp"
+        android:layout_height="101dp"
+        android:background="@drawable/boton_accion"
+        android:id="@+id/botonIrAlCentro"
+        android:rotation="90"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="92dp"
+        android:layout_height="101dp"
+        android:background="@drawable/boton_accion"
+        android:id="@+id/botonIrAlOeste"
+        android:rotation="45"
+        android:layout_above="@+id/botonIrAlCentro"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+
+</RelativeLayout>

@@ -17,7 +17,7 @@
 
     <FrameLayout
         android:id="@+id/content"
-        android:background="@drawable/fondo_bomberos"
+        android:background="@drawable/fondo_actividad002"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />

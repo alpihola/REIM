@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".Bienvenida">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -19,7 +19,7 @@
 
     <FrameLayout
         android:id="@+id/content"
-        android:background="@drawable/fondo_main"
+        android:background="@drawable/fondo_mapa_centro"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 

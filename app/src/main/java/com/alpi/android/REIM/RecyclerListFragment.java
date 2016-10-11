@@ -37,7 +37,7 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setBackground(ContextCompat.getDrawable(recyclerView.getContext(), R.drawable.fondo_bomberos));
+        recyclerView.setBackground(ContextCompat.getDrawable(recyclerView.getContext(), R.drawable.fondo_actividad002));
 
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
         mItemTouchHelper = new ItemTouchHelper(callback);

@@ -6,22 +6,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MapaEste extends Activity {
+public class MapaSur extends Activity {
 
-    Button irAlNorte;
+    Button irAlEste;
     Button irAlCentro;
-    Button irAlSur;
+    Button irAlOeste;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.vista_mapa_este);
-        irAlNorte = (Button) findViewById(R.id.botonIrAlNorte);
-        irAlNorte.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.vista_mapa_sur);
+
+        irAlEste = (Button) findViewById(R.id.botonIrAlEste);
+        irAlEste.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MapaEste.this, MapaNorte.class);
+                Intent intent = new Intent(MapaSur.this, MapaEste.class);
                 startActivity(intent);
             }
         });
@@ -30,16 +31,16 @@ public class MapaEste extends Activity {
         irAlCentro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MapaEste.this, MapaCentro.class);
+                Intent intent = new Intent(MapaSur.this, MapaCentro.class);
                 startActivity(intent);
             }
         });
 
-        irAlSur = (Button) findViewById(R.id.botonIrAlSur);
-        irAlSur.setOnClickListener(new View.OnClickListener() {
+        irAlOeste = (Button) findViewById(R.id.botonIrAlOeste);
+        irAlOeste.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MapaEste.this, MapaSur.class);
+                Intent intent = new Intent(MapaSur.this, MapaOeste.class);
                 startActivity(intent);
             }
         });

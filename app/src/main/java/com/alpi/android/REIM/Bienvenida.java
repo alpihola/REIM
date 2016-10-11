@@ -7,7 +7,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-public class MainActivity extends Activity {
+public class Bienvenida extends Activity {
 
     ImageView imageView;
 
