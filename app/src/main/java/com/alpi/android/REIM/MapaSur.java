@@ -11,6 +11,7 @@ public class MapaSur extends Activity {
     Button irAlEste;
     Button irAlCentro;
     Button irAlOeste;
+    Button cuartelActividad002;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,15 @@ public class MapaSur extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MapaSur.this, MapaOeste.class);
+                startActivity(intent);
+            }
+        });
+
+        cuartelActividad002 = (Button) findViewById(R.id.botonCuartelActividad002);
+        cuartelActividad002.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MapaSur.this, Actividad002.class);
                 startActivity(intent);
             }
         });

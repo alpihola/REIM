@@ -94,6 +94,7 @@ public class RecyclerGridAdapter extends RecyclerView.Adapter<RecyclerGridAdapte
 
         public ItemViewHolder(View itemView) {
             super(itemView);
+            itemView.setLayoutParams(new RecyclerView.LayoutParams(100,100));
             textView = (TextView) itemView.findViewById(R.id.text);
             handleView = (ImageView) itemView.findViewById(R.id.handle);
         }

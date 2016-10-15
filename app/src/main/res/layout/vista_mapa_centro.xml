@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mapa_este"
+    android:id="@+id/main_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Bienvenida">
+    android:background="@drawable/fondo_mapa_norte"
+    tools:context=".MapaNorte">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -17,12 +18,63 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <FrameLayout
-        android:id="@+id/content"
-        android:background="@drawable/fondo_mapa_centro"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+    <TextView
+        android:text="Mapa Centro"
+        android:layout_width="117dp"
+        android:layout_height="34dp"
+        android:id="@+id/textView"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
-    </FrameLayout>
 
-</LinearLayout>
+    <Button
+        android:layout_width="92dp"
+        android:layout_height="101dp"
+        android:background="@drawable/boton_accion"
+        android:id="@+id/botonIrAlEste"
+        android:rotation="180"
+        android:layout_alignTop="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="92dp"
+        android:layout_height="101dp"
+        android:background="@drawable/boton_accion"
+        android:id="@+id/botonIrAlOeste"
+        android:layout_alignTop="@+id/textView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="92dp"
+        android:layout_height="101dp"
+        android:background="@drawable/boton_accion"
+        android:id="@+id/botonIrAlSur"
+        android:rotation="90"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="92dp"
+        android:layout_height="101dp"
+        android:layout_below="@+id/toolbar"
+        android:background="@drawable/boton_accion"
+        android:rotation="270"
+        android:layout_alignLeft="@+id/botonIrAlSur"
+        android:layout_alignStart="@+id/botonIrAlSur"
+        android:id="@+id/botonIrAlNorte" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/botonIrAlSur"
+        android:layout_toLeftOf="@+id/botonIrAlOeste"
+        android:layout_toStartOf="@+id/botonIrAlOeste"
+        android:layout_marginRight="68dp"
+        android:layout_marginEnd="68dp"
+        android:id="@+id/botonIrAfragment" />
+
+
+</RelativeLayout>

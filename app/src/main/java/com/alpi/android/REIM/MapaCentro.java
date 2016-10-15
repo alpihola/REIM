@@ -1,43 +1,59 @@
 package com.alpi.android.REIM;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 
-public class MapaCentro extends AppCompatActivity implements MainFragment.OnListItemClickListener {
+public class MapaCentro extends Activity {
+
+    Button irAlEste;
+    Button irAlNorte;
+    Button irAlOeste;
+    Button irAlSur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.vista_mapa_centro);
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
-        if (savedInstanceState == null) {
-            MainFragment fragment = new MainFragment();
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.content, fragment)
-                    .commit();
-        }
-    }
+        irAlEste = (Button) findViewById(R.id.botonIrAlEste);
+        irAlEste.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MapaCentro.this, MapaEste.class);
+                startActivity(intent);
+            }
+        });
 
-    @Override
-    public void onListItemClick(int position) {
-        Fragment fragment = null;
-        switch (position) {
-            case 0:
-                fragment = new RecyclerListFragment();
-                break;
+        irAlNorte = (Button) findViewById(R.id.botonIrAlNorte);
+        irAlNorte.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MapaCentro.this, MapaNorte.class);
+                startActivity(intent);
+            }
+        });
 
-            case 1:
-                fragment = new RecyclerGridFragment();
-                break;
-        }
+        irAlOeste = (Button) findViewById(R.id.botonIrAlOeste);
+        irAlOeste.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MapaCentro.this, MapaOeste.class);
+                startActivity(intent);
+            }
+        });
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content, fragment)
-                .addToBackStack(null)
-                .commit();
+        irAlSur = (Button) findViewById(R.id.botonIrAlSur);
+        irAlSur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MapaCentro.this, MapaSur.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

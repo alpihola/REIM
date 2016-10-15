@@ -37,21 +37,34 @@
     <Button
         android:layout_width="92dp"
         android:layout_height="101dp"
-        android:background="@drawable/boton_accion"
-        android:id="@+id/botonIrAlEste"
-        android:rotation="180"
-        android:layout_above="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:background="@drawable/boton_cuartel_actividad002"
+        android:id="@+id/botonCuartelActividad002"
+        android:layout_marginBottom="45dp"
+        android:layout_marginRight="52dp"
+        android:layout_marginEnd="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/textView"
+        android:layout_toStartOf="@+id/textView" />
 
     <Button
         android:layout_width="92dp"
         android:layout_height="101dp"
         android:background="@drawable/boton_accion"
         android:id="@+id/botonIrAlOeste"
-        android:rotation="45"
-        android:layout_above="@+id/textView"
+        android:rotation="315"
+        android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="92dp"
+        android:layout_height="101dp"
+        android:background="@drawable/boton_accion"
+        android:id="@+id/botonIrAlEste"
+        android:rotation="225"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+         />
 
 </RelativeLayout>

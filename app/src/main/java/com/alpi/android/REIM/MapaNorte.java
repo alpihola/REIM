@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import static android.R.attr.fragment;
-
 public class MapaNorte extends Activity {
 
     Button irAlEste;
@@ -48,14 +46,15 @@ public class MapaNorte extends Activity {
             }
         });
 
-        /*
+
         casaActividad001 = (Button) findViewById(R.id.botonCasaActividad001);
         casaActividad001.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(MapaNorte.this, Actividad001.class);
+                startActivity(intent);
             }
-        }); */
+        });
 
     }
 }

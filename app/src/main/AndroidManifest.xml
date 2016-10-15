@@ -48,6 +48,21 @@
             android:label="@string/app_name">
         </activity>
 
+        <activity
+            android:name=".Actividad001"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity
+            android:name=".Actividad002"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity
+            android:name=".FragmentActividades"
+            android:label="@string/app_name">
+        </activity>
+
     </application>
 
 </manifest>
