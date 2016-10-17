@@ -21,6 +21,5 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
         android:scaleType="center"
-        android:src="@drawable/grey_handler"
         android:contentDescription="handler" />
 </FrameLayout>
