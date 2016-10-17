@@ -65,16 +65,4 @@
         android:layout_alignStart="@+id/botonIrAlSur"
         android:id="@+id/botonIrAlNorte" />
 
-    <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/botonIrAlSur"
-        android:layout_toLeftOf="@+id/botonIrAlOeste"
-        android:layout_toStartOf="@+id/botonIrAlOeste"
-        android:layout_marginRight="68dp"
-        android:layout_marginEnd="68dp"
-        android:id="@+id/botonIrAfragment" />
-
-
 </RelativeLayout>

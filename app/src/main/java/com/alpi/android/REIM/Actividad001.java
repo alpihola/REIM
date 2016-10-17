@@ -9,9 +9,33 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import com.alpi.android.REIM.helper.OnStartDragListener;
 import com.alpi.android.REIM.helper.SimpleItemTouchHelperCallback;
 
+import java.util.ArrayList;
+
 public class Actividad001 extends AppCompatActivity implements OnStartDragListener {
 
     private ItemTouchHelper mItemTouchHelper;
+
+    private final String nombreAlimento[] = {
+            "Chocolate",
+            "Hamburguesa",
+            "Manzana",
+            "Papas Fritas",
+            "Pizza",
+            "Queso",
+            "Sandia",
+            "Zanahoria",
+    };
+
+    private final String imagenAlimento[] = {
+            "http://i.imgur.com/JTTYxxw.png",
+            "http://i.imgur.com/JTTYxxw.png",
+            "http://i.imgur.com/JTTYxxw.png",
+            "http://i.imgur.com/JTTYxxw.png",
+            "http://i.imgur.com/JTTYxxw.png",
+            "http://i.imgur.com/JTTYxxw.png",
+            "http://i.imgur.com/JTTYxxw.png",
+            "http://i.imgur.com/JTTYxxw.png",
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +43,15 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
 
         setContentView(R.layout.vista_actividad001);
 
-        final RecyclerGridAdapter adapter = new RecyclerGridAdapter(this.getApplicationContext(), this);
+        ArrayList<Alimentos> alimentos = new ArrayList<>();
+        for(int i=0;i<nombreAlimento.length;i++) {
+            Alimentos nuevoAlimento = new Alimentos();
+            nuevoAlimento.setNombreAlimento(nombreAlimento[i]);
+            nuevoAlimento.setImagenAlimento(imagenAlimento[i]);
+            alimentos.add(nuevoAlimento);
+        }
+
+        final AlimentosAdapter adapter = new AlimentosAdapter(this.getApplicationContext(), alimentos, this);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.matrizAlimentos);
         recyclerView.setAdapter(adapter);
@@ -30,7 +62,9 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
 
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
         mItemTouchHelper = new ItemTouchHelper(callback);
-        mItemTouchHelper.attachToRecyclerView(recyclerView);    }
+        mItemTouchHelper.attachToRecyclerView(recyclerView);
+
+    }
 
     @Override
     public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
