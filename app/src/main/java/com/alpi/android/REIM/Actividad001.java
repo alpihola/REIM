@@ -28,13 +28,13 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
 
     private final String imagenAlimento[] = {
             "http://i.imgur.com/JTTYxxw.png",
-            "http://i.imgur.com/JTTYxxw.png",
-            "http://i.imgur.com/JTTYxxw.png",
-            "http://i.imgur.com/JTTYxxw.png",
-            "http://i.imgur.com/JTTYxxw.png",
-            "http://i.imgur.com/JTTYxxw.png",
-            "http://i.imgur.com/JTTYxxw.png",
-            "http://i.imgur.com/JTTYxxw.png",
+            "http://i.imgur.com/N7IS3vq.png",
+            "http://i.imgur.com/HgApYuS.png",
+            "http://i.imgur.com/kdVzM9v.png",
+            "http://i.imgur.com/M5pjsq9.png",
+            "http://i.imgur.com/26FrW0d.png",
+            "http://i.imgur.com/iRfzuf4.png",
+            "http://i.imgur.com/jBfoKWu.png",
     };
 
     @Override

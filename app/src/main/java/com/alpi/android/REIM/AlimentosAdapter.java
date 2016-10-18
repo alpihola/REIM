@@ -45,7 +45,7 @@ implements ItemTouchHelperAdapter {
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.nombre.setText(alimentos.get(position).getNombreAlimento());
+        //holder.nombre.setText(alimentos.get(position).getNombreAlimento());
         Picasso.with(context).load(alimentos.get(position).getImagenAlimento()).resize(85, 85).into(holder.imagen);
         holder.imagen.setScaleType(ImageView.ScaleType.FIT_CENTER);
         holder.imagen.setOnTouchListener(new View.OnTouchListener() {
