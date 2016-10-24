@@ -67,7 +67,8 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
     }
 
     @Override
-    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
-        mItemTouchHelper.startDrag(viewHolder);
+    public void startSwipe(RecyclerView.ViewHolder viewHolder) {
+        mItemTouchHelper.startSwipe(viewHolder);
     }
+
 }

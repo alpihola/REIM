@@ -52,7 +52,7 @@ implements ItemTouchHelperAdapter {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
-                    mDragStartListener2.onStartDrag(holder);
+                    mDragStartListener2.startSwipe(holder);
                 }
                 return false;
             }

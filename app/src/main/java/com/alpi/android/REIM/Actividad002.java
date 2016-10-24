@@ -2,6 +2,7 @@ package com.alpi.android.REIM;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -56,7 +57,8 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.listaElementosBomberos);
         recyclerView.setAdapter(adapter);
 
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(this.getApplicationContext());
+        final int spanCount = 2;
+        final GridLayoutManager layoutManager = new GridLayoutManager(this.getApplicationContext(), spanCount);
         recyclerView.setLayoutManager(layoutManager);
 
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
@@ -64,7 +66,8 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
         mItemTouchHelper.attachToRecyclerView(recyclerView);    }
 
     @Override
-    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
-        mItemTouchHelper.startDrag(viewHolder);
+    public void startSwipe(RecyclerView.ViewHolder viewHolder) {
+        mItemTouchHelper.startSwipe(viewHolder);
     }
+
 }
