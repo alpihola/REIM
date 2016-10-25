@@ -1,10 +1,13 @@
 package com.alpi.android.REIM;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.View;
+import android.widget.Button;
 
 import com.alpi.android.REIM.helper.OnStartDragListener;
 import com.alpi.android.REIM.helper.SimpleItemTouchHelperCallback;
@@ -14,6 +17,7 @@ import java.util.ArrayList;
 public class Actividad001 extends AppCompatActivity implements OnStartDragListener {
 
     private ItemTouchHelper mItemTouchHelper;
+    Button instruccionActividad001;
 
     private final String nombreAlimento[] = {
             "Chocolate",
@@ -41,17 +45,17 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.vista_actividad001);
+        setContentView(R.layout.vista_actividad_001);
 
-        ArrayList<Alimentos> alimentos = new ArrayList<>();
+        ArrayList<Alimento> alimentos = new ArrayList<>();
         for(int i=0;i<nombreAlimento.length;i++) {
-            Alimentos nuevoAlimento = new Alimentos();
+            Alimento nuevoAlimento = new Alimento();
             nuevoAlimento.setNombreAlimento(nombreAlimento[i]);
             nuevoAlimento.setImagenAlimento(imagenAlimento[i]);
             alimentos.add(nuevoAlimento);
         }
 
-        final AlimentosAdapter adapter = new AlimentosAdapter(this.getApplicationContext(), alimentos, this);
+        final AlimentoAdapter adapter = new AlimentoAdapter(this.getApplicationContext(), alimentos, this);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.matrizAlimentos);
         recyclerView.setAdapter(adapter);
@@ -63,6 +67,15 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
         mItemTouchHelper = new ItemTouchHelper(callback);
         mItemTouchHelper.attachToRecyclerView(recyclerView);
+
+        instruccionActividad001 = (Button) findViewById(R.id.botonInstruccion);
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.instruccion_actividad_001);
+        instruccionActividad001.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mediaPlayer.start();
+            }
+        });
 
     }
 

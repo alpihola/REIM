@@ -2,6 +2,7 @@ package com.alpi.android.REIM;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ public class MapaNorte extends Activity {
     Button irAlCentro;
     Button irAlOeste;
     Button casaActividad001;
+    Button instruccionMiraCasa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,15 @@ public class MapaNorte extends Activity {
             public void onClick(View view) {
                 Intent intent = new Intent(MapaNorte.this, Actividad001.class);
                 startActivity(intent);
+            }
+        });
+
+        instruccionMiraCasa = (Button) findViewById(R.id.botonInstruccion);
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.mira_casa);
+        instruccionMiraCasa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mediaPlayer.start();
             }
         });
 

@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo_mapa_oeste"
     tools:context=".MapaOeste">
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <TextView
         android:text="Mapa Oeste"
@@ -26,33 +17,52 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="92dp"
-        android:layout_height="101dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:background="@drawable/boton_accion"
         android:id="@+id/botonIrAlSur"
         android:rotation="135"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="92dp"
-        android:layout_height="101dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:background="@drawable/boton_accion"
         android:id="@+id/botonIrAlNorte"
         android:rotation="215"
-        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"/>
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/boton_accion"
+        android:id="@+id/botonIrAlCentro"
+        android:rotation="180"
+        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <Button
-        android:layout_width="92dp"
-        android:layout_height="101dp"
-        android:background="@drawable/boton_accion"
-        android:id="@+id/botonIrAlCentro"
-        android:rotation="180"
-        android:layout_alignTop="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/boton_instrucciones"
+        android:id="@+id/botonInstruccion"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="140dp"
+        android:layout_height="120dp"
+        android:background="@drawable/boton_actividad_esteban_museo"
+        android:scaleX="-1"
+        android:id="@+id/botonMuseoActividadEsteban"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="47dp"
+        android:layout_marginEnd="47dp" />
 
 </RelativeLayout>

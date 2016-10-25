@@ -1,6 +1,6 @@
 package com.alpi.android.REIM;
 
-public class ElementosBomberos {
+public class ElementoBomberos {
 
     private String nombreElementoBomberos;
     private String imagenElementoBomberos;

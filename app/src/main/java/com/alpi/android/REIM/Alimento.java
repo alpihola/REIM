@@ -1,6 +1,6 @@
 package com.alpi.android.REIM;
 
-public class Alimentos {
+public class Alimento {
 
     private String nombreAlimento;
     private String imagenAlimento;

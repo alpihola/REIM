@@ -1,11 +1,13 @@
 package com.alpi.android.REIM;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.View;
+import android.widget.Button;
 
 import com.alpi.android.REIM.helper.OnStartDragListener;
 import com.alpi.android.REIM.helper.SimpleItemTouchHelperCallback;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 public class Actividad002 extends AppCompatActivity implements OnStartDragListener {
 
     private ItemTouchHelper mItemTouchHelper;
+    Button instruccionActividad002;
 
     private final String nombreElementoBomberos[] = {
             "Balon Futbol",
@@ -42,17 +45,17 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.vista_actividad002);
+        setContentView(R.layout.vista_actividad_002);
 
-        ArrayList<ElementosBomberos> elementosBomberos = new ArrayList<>();
+        ArrayList<ElementoBomberos> elementosBomberos = new ArrayList<>();
         for(int i=0;i<nombreElementoBomberos.length;i++) {
-            ElementosBomberos nuevoElementoBomberos = new ElementosBomberos();
+            ElementoBomberos nuevoElementoBomberos = new ElementoBomberos();
             nuevoElementoBomberos.setNombreElementoBomberos(nombreElementoBomberos[i]);
             nuevoElementoBomberos.setImagenElementoBomberos(imagenElementoBomberos[i]);
             elementosBomberos.add(nuevoElementoBomberos);
         }
 
-        final ElementosBomberosAdapter adapter = new ElementosBomberosAdapter(this.getApplicationContext(), elementosBomberos, this);
+        final ElementoBomberosAdapter adapter = new ElementoBomberosAdapter(this.getApplicationContext(), elementosBomberos, this);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.listaElementosBomberos);
         recyclerView.setAdapter(adapter);
@@ -63,7 +66,18 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
 
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
         mItemTouchHelper = new ItemTouchHelper(callback);
-        mItemTouchHelper.attachToRecyclerView(recyclerView);    }
+        mItemTouchHelper.attachToRecyclerView(recyclerView);
+
+        instruccionActividad002 = (Button) findViewById(R.id.botonInstruccion);
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.instruccion_actividad_002);
+        instruccionActividad002.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mediaPlayer.start();
+            }
+        });
+
+    }
 
     @Override
     public void startSwipe(RecyclerView.ViewHolder viewHolder) {
