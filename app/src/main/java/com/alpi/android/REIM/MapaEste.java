@@ -12,7 +12,8 @@ public class MapaEste extends Activity {
     Button irAlNorte;
     Button irAlCentro;
     Button irAlSur;
-    Button instruccionDebemosLlegarAlMuseo;
+    Button instruccionMiraMuseo;
+    Button instruccionRecolectarTickets;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +47,21 @@ public class MapaEste extends Activity {
             }
         });
 
-        instruccionDebemosLlegarAlMuseo = (Button) findViewById(R.id.botonInstruccion);
-        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.debemos_llegar_al_museo);
-        instruccionDebemosLlegarAlMuseo.setOnClickListener(new View.OnClickListener() {
+        instruccionRecolectarTickets = (Button) findViewById(R.id.botonMuseoActividadEsteban);
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.para_entrar_museo);
+        instruccionRecolectarTickets.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mediaPlayer.start();
+            }
+        });
+
+        instruccionMiraMuseo = (Button) findViewById(R.id.botonInstruccion);
+        final MediaPlayer mediaPlayer2 = MediaPlayer.create(this, R.raw.mira_museo);
+        instruccionMiraMuseo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mediaPlayer2.start();
             }
         });
 

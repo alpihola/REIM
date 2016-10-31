@@ -17,6 +17,7 @@ import com.alpi.android.REIM.helper.OnStartDragListener;
 import com.squareup.picasso.Picasso;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -26,6 +27,7 @@ public class AlimentoAdapter extends RecyclerView.Adapter<AlimentoAdapter.ViewHo
 implements ItemTouchHelperAdapter {
 
     private ArrayList<Alimento> alimentos;
+    public String alimentosFinales[] = {};
     private Context context;
     private final OnStartDragListener mDragStartListener2;
 
@@ -45,7 +47,7 @@ implements ItemTouchHelperAdapter {
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        //holder.nombre.setText(alimentos.get(position).getNombreAlimento());
+        holder.nombre.setText(alimentos.get(position).getNombreAlimento());
         Picasso.with(context).load(alimentos.get(position).getImagenAlimento()).resize(85, 85).into(holder.imagen);
         holder.imagen.setScaleType(ImageView.ScaleType.FIT_CENTER);
         holder.imagen.setOnTouchListener(new View.OnTouchListener() {
@@ -77,6 +79,13 @@ implements ItemTouchHelperAdapter {
         return alimentos.size();
     }
 
+    public String getResult(int position) {
+        for(int i=0;i<alimentos.size();i++) {
+            alimentosFinales[i] = alimentos.get(position).getNombreAlimento();
+        }
+        return alimentosFinales[alimentosFinales.length];
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
         TextView nombre;
         ImageView imagen;
@@ -84,8 +93,8 @@ implements ItemTouchHelperAdapter {
         public ViewHolder(View view) {
             super(view);
 
-            nombre = (TextView)view.findViewById(R.id.nombre);
-            imagen = (ImageView)view.findViewById(R.id.imagen);
+            nombre = (TextView) view.findViewById(R.id.nombre);
+            imagen = (ImageView) view.findViewById(R.id.imagen);
         }
 
         @Override
@@ -98,5 +107,4 @@ implements ItemTouchHelperAdapter {
             itemView.setBackgroundColor(0);
         }
     }
-
 }

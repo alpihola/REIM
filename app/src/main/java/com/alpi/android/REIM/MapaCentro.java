@@ -25,7 +25,7 @@ public class MapaCentro extends Activity {
         irAlEste.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MapaCentro.this, MapaEste.class);
+                Intent intent = new Intent(MapaCentro.this, MapaOeste.class);
                 startActivity(intent);
             }
         });
@@ -43,7 +43,7 @@ public class MapaCentro extends Activity {
         irAlOeste.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MapaCentro.this, MapaOeste.class);
+                Intent intent = new Intent(MapaCentro.this, MapaEste.class);
                 startActivity(intent);
             }
         });

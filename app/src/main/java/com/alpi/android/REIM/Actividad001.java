@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.alpi.android.REIM.helper.OnStartDragListener;
 import com.alpi.android.REIM.helper.SimpleItemTouchHelperCallback;
@@ -18,6 +19,9 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
 
     private ItemTouchHelper mItemTouchHelper;
     Button instruccionActividad001;
+    Button mostrarResultado;
+    int duracionToast = Toast.LENGTH_SHORT;
+
 
     private final String nombreAlimento[] = {
             "Chocolate",
@@ -47,7 +51,8 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
 
         setContentView(R.layout.vista_actividad_001);
 
-        ArrayList<Alimento> alimentos = new ArrayList<>();
+        final ArrayList<Alimento> alimentos = new ArrayList<>();
+
         for(int i=0;i<nombreAlimento.length;i++) {
             Alimento nuevoAlimento = new Alimento();
             nuevoAlimento.setNombreAlimento(nombreAlimento[i]);
@@ -77,6 +82,17 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
             }
         });
 
+        mostrarResultado = (Button) findViewById(R.id.botonMostrarResultado);
+        mostrarResultado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CharSequence text = "Hello toast!";
+                for(int i=0; i<alimentos.size();i++) {
+                Toast toast = Toast.makeText(getApplicationContext(), text, duracionToast);
+                toast.show();
+                }
+            }
+        });
     }
 
     @Override

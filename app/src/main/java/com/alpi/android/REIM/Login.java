@@ -20,7 +20,7 @@ public class Login extends Activity {
         Entrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Login.this, MapaEste.class);
+                Intent intent = new Intent(Login.this, MapaOeste.class);
                 startActivity(intent);
             }
         });
