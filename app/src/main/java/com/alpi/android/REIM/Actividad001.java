@@ -86,11 +86,7 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
         mostrarResultado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CharSequence text = "Hello toast!";
-                for(int i=0; i<alimentos.size();i++) {
-                Toast toast = Toast.makeText(getApplicationContext(), text, duracionToast);
-                toast.show();
-                }
+                adapter.getResult();
             }
         });
     }

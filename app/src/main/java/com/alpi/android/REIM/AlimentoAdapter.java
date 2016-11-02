@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alpi.android.REIM.helper.ItemTouchHelperAdapter;
 import com.alpi.android.REIM.helper.ItemTouchHelperViewHolder;
@@ -30,6 +31,7 @@ implements ItemTouchHelperAdapter {
     public String alimentosFinales[] = {};
     private Context context;
     private final OnStartDragListener mDragStartListener2;
+    int duracionToast = Toast.LENGTH_SHORT;
 
     public AlimentoAdapter(Context context, ArrayList<Alimento> alimentos, OnStartDragListener dragStartListener) {
         this.context = context;
@@ -79,11 +81,15 @@ implements ItemTouchHelperAdapter {
         return alimentos.size();
     }
 
-    public String getResult(int position) {
-        for(int i=0;i<alimentos.size();i++) {
-            alimentosFinales[i] = alimentos.get(position).getNombreAlimento();
+    public void getResult() {
+        String[] alimentosFinales = new String[alimentos.size()];
+        int index = 0;
+        for (Alimento nombreAlimento : alimentos) {
+            alimentosFinales[index] = String.valueOf( nombreAlimento );
+            index++;
         }
-        return alimentosFinales[alimentosFinales.length];
+        Toast toast = Toast.makeText(context, alimentosFinales[0], duracionToast);
+        toast.show();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
