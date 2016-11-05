@@ -18,7 +18,6 @@ import com.alpi.android.REIM.helper.OnStartDragListener;
 import com.squareup.picasso.Picasso;
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -28,7 +27,6 @@ public class AlimentoAdapter extends RecyclerView.Adapter<AlimentoAdapter.ViewHo
 implements ItemTouchHelperAdapter {
 
     private ArrayList<Alimento> alimentos;
-    public String alimentosFinales[] = {};
     private Context context;
     private final OnStartDragListener mDragStartListener2;
     int duracionToast = Toast.LENGTH_SHORT;
@@ -65,8 +63,8 @@ implements ItemTouchHelperAdapter {
 
     @Override
     public void onItemDismiss(int position) {
-        alimentos.remove(position);
-        notifyItemRemoved(position);
+            alimentos.remove(position);
+            notifyItemRemoved(position);
     }
 
     @Override
@@ -81,16 +79,6 @@ implements ItemTouchHelperAdapter {
         return alimentos.size();
     }
 
-    public void getResult() {
-        String[] alimentosFinales = new String[alimentos.size()];
-        int index = 0;
-        for (Alimento nombreAlimento : alimentos) {
-            alimentosFinales[index] = String.valueOf( nombreAlimento );
-            index++;
-        }
-        Toast toast = Toast.makeText(context, alimentosFinales[0], duracionToast);
-        toast.show();
-    }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
         TextView nombre;
@@ -111,6 +99,20 @@ implements ItemTouchHelperAdapter {
         @Override
         public void onItemClear() {
             itemView.setBackgroundColor(0);
+        }
+    }
+
+    public void getResult() {
+        String[] alimentosFinales = new String[alimentos.size()];
+        for (int i = 0; i < alimentosFinales.length; i++){
+            alimentosFinales[i] = alimentos.get(i).getNombreAlimento().toString();
+         }
+        if(alimentosFinales.length==0){
+            Toast toast1 = Toast.makeText(context, "No hay alimentos", duracionToast);
+            toast1.show();
+        } else {
+            Toast toast = Toast.makeText(context, alimentosFinales[0], duracionToast);
+            toast.show();
         }
     }
 }

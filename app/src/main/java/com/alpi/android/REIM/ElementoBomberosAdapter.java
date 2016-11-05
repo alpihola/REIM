@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alpi.android.REIM.helper.ItemTouchHelperAdapter;
 import com.alpi.android.REIM.helper.ItemTouchHelperViewHolder;
@@ -26,6 +27,7 @@ implements ItemTouchHelperAdapter {
     private ArrayList<ElementoBomberos> elementosBomberos;
     private Context context;
     private final OnStartDragListener mDragStartListener;
+    int duracionToast = Toast.LENGTH_SHORT;
 
     public ElementoBomberosAdapter(Context context, ArrayList<ElementoBomberos> elementosBomberos, OnStartDragListener dragStartListener) {
         this.context = context;
@@ -43,7 +45,7 @@ implements ItemTouchHelperAdapter {
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        //holder.nombre.setText(elementosBomberos.get(position).getNombreElementoBomberos());
+        holder.nombre.setText(elementosBomberos.get(position).getNombreElementoBomberos());
         Picasso.with(context).load(elementosBomberos.get(position).getImagenElementoBomberos()).resize(85,85).into(holder.imagen);
         holder.imagen.setScaleType(ImageView.ScaleType.FIT_CENTER);
         holder.imagen.setOnTouchListener(new View.OnTouchListener() {
@@ -96,6 +98,20 @@ implements ItemTouchHelperAdapter {
             itemView.setBackgroundColor(0);
         }
 
+    }
+
+    public void getResult() {
+        String[] elementosBomberosFinales = new String[elementosBomberos.size()];
+        for (int i = 0; i < elementosBomberosFinales.length; i++){
+            elementosBomberosFinales[i] = elementosBomberos.get(i).getNombreElementoBomberos().toString();
+        }
+        if(elementosBomberosFinales.length==0){
+            Toast toast1 = Toast.makeText(context, "No hay alimentos", duracionToast);
+            toast1.show();
+        } else {
+            Toast toast = Toast.makeText(context, elementosBomberosFinales[0], duracionToast);
+            toast.show();
+        }
     }
 
 }

@@ -1,7 +1,9 @@
 package com.alpi.android.REIM;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,7 +22,6 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
     private ItemTouchHelper mItemTouchHelper;
     Button instruccionActividad001;
     Button mostrarResultado;
-    int duracionToast = Toast.LENGTH_SHORT;
 
 
     private final String nombreAlimento[] = {
@@ -87,6 +88,16 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
             @Override
             public void onClick(View view) {
                 adapter.getResult();
+
+                new Handler().postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(Actividad001.this, MapaNorte.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }, 2000);
             }
         });
     }
