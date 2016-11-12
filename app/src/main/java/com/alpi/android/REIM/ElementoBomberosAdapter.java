@@ -61,6 +61,8 @@ implements ItemTouchHelperAdapter {
 
     @Override
     public void onItemDismiss(int position) {
+        Toast toast = Toast.makeText(context, elementosBomberos.get(0).getNombreElementoBomberos(), duracionToast);
+        toast.show();
         elementosBomberos.remove(position);
         notifyItemRemoved(position);
     }
