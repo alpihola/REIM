@@ -6,16 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/fondo_mapa_norte"
+    android:background="@drawable/fondo_mapa_centro"
     tools:context=".MapaCentro">
-
-    <TextView
-        android:text="Mapa Centro"
-        android:layout_width="117dp"
-        android:layout_height="34dp"
-        android:id="@+id/textView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="50dp"

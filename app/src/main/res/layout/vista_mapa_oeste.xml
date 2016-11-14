@@ -5,16 +5,17 @@
     android:id="@+id/main_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo_mapa_este"
+    android:background="@drawable/fondo_mapa_oeste"
     tools:context=".MapaOeste">
 
-    <TextView
-        android:text="Mapa Oeste"
-        android:layout_width="117dp"
-        android:layout_height="34dp"
-        android:id="@+id/textView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+    <ImageView
+        android:id="@+id/casaInicio"
+        android:background="@drawable/casa_inicio"
+        android:layout_width="145dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="210dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"/>
 
     <Button
         android:layout_width="50dp"
@@ -26,24 +27,6 @@
         android:layout_alignParentEnd="true" />
 
     <Button
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/boton_accion"
-        android:id="@+id/botonIrAlNorte"
-        android:rotation="310"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"/>
-
-    <Button
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/boton_accion"
-        android:id="@+id/botonIrAlSur"
-        android:rotation="45"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
-    <Button
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/boton_instrucciones"
@@ -51,5 +34,27 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/boton_accion"
+        android:id="@+id/botonIrAlNorte"
+        android:rotation="300"
+        android:layout_marginRight="111dp"
+        android:layout_marginEnd="111dp"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/botonIrAlCentro"
+        android:layout_toStartOf="@+id/botonIrAlCentro" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/boton_accion"
+        android:id="@+id/botonIrAlSur"
+        android:rotation="55"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/botonIrAlNorte"
+        android:layout_alignStart="@+id/botonIrAlNorte" />
 
 </RelativeLayout>

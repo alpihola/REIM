@@ -63,10 +63,10 @@ implements ItemTouchHelperAdapter {
 
     @Override
     public void onItemDismiss(int position) {
-        Toast toast = Toast.makeText(context, alimentos.get(0).getNombreAlimento(), duracionToast);
+        Toast toast = Toast.makeText(context, alimentos.get(position).getNombreAlimento(), duracionToast);
         toast.show();
-            alimentos.remove(position);
-            notifyItemRemoved(position);
+        alimentos.remove(position);
+        notifyItemRemoved(position);
     }
 
     @Override
@@ -107,14 +107,7 @@ implements ItemTouchHelperAdapter {
     public void getResult() {
         String[] alimentosFinales = new String[alimentos.size()];
         for (int i = 0; i < alimentosFinales.length; i++){
-            alimentosFinales[i] = alimentos.get(i).getNombreAlimento().toString();
+            alimentosFinales[i] = alimentos.get(i).getNombreAlimento();
          }
-        if(alimentosFinales.length==0){
-            Toast toast1 = Toast.makeText(context, "No hay alimentos", duracionToast);
-            toast1.show();
-        } else {
-            Toast toast = Toast.makeText(context, alimentosFinales[0], duracionToast);
-            toast.show();
-        }
     }
 }

@@ -16,12 +16,32 @@ public class MapaNorte extends Activity {
     Button instruccionMiraCasa;
 
     @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        View decorView = getWindow().getDecorView();
+        if (hasFocus) {
+            decorView.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);}
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE);
 
         setContentView(R.layout.vista_mapa_norte);
 
-        irAlEste = (Button) findViewById(R.id.botonIrAlEste);
+        irAlEste = (Button) findViewById(R.id.botonIrAlOeste);
         irAlEste.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,7 +59,7 @@ public class MapaNorte extends Activity {
             }
         });
 
-        irAlOeste = (Button) findViewById(R.id.botonIrAlOeste);
+        irAlOeste = (Button) findViewById(R.id.botonIrAlEste);
         irAlOeste.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
