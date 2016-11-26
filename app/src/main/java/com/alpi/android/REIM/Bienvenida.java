@@ -3,6 +3,7 @@ package com.alpi.android.REIM;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -49,8 +50,13 @@ public class Bienvenida extends Activity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                finish();
-                startActivity(new Intent(getApplicationContext(), Login.class));
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(getApplicationContext(), Login.class));
+                        finish();
+                    }
+                }, 2000);
             }
 
             @Override

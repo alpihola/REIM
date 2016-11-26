@@ -49,11 +49,12 @@
 
     <Button
         android:layout_width="270dp"
-        android:layout_height="200dp"
+        android:layout_height="210dp"
         android:background="@drawable/boton_actividad_esteban_museo"
         android:id="@+id/botonMuseoActividadEsteban"
-        android:layout_marginTop="185dp"
-        android:layout_marginLeft="730dp"
-        android:layout_marginStart="730dp"/>
+        android:layout_below="@+id/botonIrAlNorte"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="120dp" />
 
 </RelativeLayout>

@@ -4,7 +4,7 @@ public class ElementoBomberos {
 
     private String nombreElementoBomberos;
     private String imagenElementoBomberos;
-    //private boolean corresponde;
+    private boolean correspondeElementoBomberos;
 
     public String getNombreElementoBomberos() {
         return nombreElementoBomberos;
@@ -22,14 +22,14 @@ public class ElementoBomberos {
         this.imagenElementoBomberos = imagenElementoBomberos;
     }
 
-    /*
-    public boolean getCorresponde() {
-        return corresponde;
+
+    public boolean getCorrespondeElementoBomberos() {
+        return correspondeElementoBomberos;
     }
 
-    public void setCorresponde(boolean corresponde) {
-        this.corresponde = corresponde;
+    public void setCorrespondeElementoBomberos(boolean correspondeElementoBomberos) {
+        this.correspondeElementoBomberos = correspondeElementoBomberos;
     }
-    */
+
 
 }

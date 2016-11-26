@@ -4,7 +4,7 @@ public class Alimento {
 
     private String nombreAlimento;
     private String imagenAlimento;
-    //private boolean corresponde;
+    private boolean correspondeAlimento;
 
     public String getNombreAlimento() {
         return nombreAlimento;
@@ -22,14 +22,12 @@ public class Alimento {
         this.imagenAlimento = imagenAlimento;
     }
 
-    /*
-    public boolean getCorresponde() {
-        return corresponde;
+    public boolean getCorrespondeAlimento() {
+        return correspondeAlimento;
     }
 
-    public void setCorresponde(boolean corresponde) {
-        this.corresponde = corresponde;
+    public void setCorrespondeAlimento(boolean corresponde) {
+        this.correspondeAlimento = corresponde;
     }
-    */
 
 }

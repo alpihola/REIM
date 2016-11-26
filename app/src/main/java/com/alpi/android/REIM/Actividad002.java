@@ -10,12 +10,13 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.alpi.android.REIM.helper.OnStartDragListener;
 import com.alpi.android.REIM.helper.SimpleItemTouchHelperCallback;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 public class Actividad002 extends AppCompatActivity implements OnStartDragListener {
 
@@ -24,25 +25,72 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
     Button mostrarResultado;
 
     private final String nombreElementoBomberos[] = {
-            "Balon Futbol",
+            "Botas",
+            "Cámara",
             "Casco",
+            "Chaqueta Negra",
+            "Chaqueta Roja",
             "Cono Advertencia",
+            "Cuadro",
+            "Cubo Rubik",
             "Estetoscopio",
+            "Micrófono",
             "Extintor",
-            "Guantes",
+            "Balón Fútbol",
+            "Guantes Box",
             "Hacha",
+            "Guitarra",
+            "Pingüino",
             "Manguera",
+            "Guantes Bombero",
+            "Paleta Ping-Pong",
+            "Skate"
+    };
+
+    private final boolean correspondeElementoBomberos[] = {
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            true,
+            false,
+            false,
+            true,
+            true,
+            false,
+            false
     };
 
     private final String imagenElementoBomberos[] = {
-            "http://i.imgur.com/KU0Y7a7.png",
-            "http://i.imgur.com/rGykl5D.png",
-            "http://i.imgur.com/tmtSr9t.png",
-            "http://i.imgur.com/F7cAxoo.png",
-            "http://i.imgur.com/pgqsqLK.png",
-            "http://i.imgur.com/lt28yxB.png",
-            "http://i.imgur.com/KgfsWxH.png",
-            "http://i.imgur.com/HFmxkkt.png",
+            "http://i.imgur.com/dHWXFB6.png",
+            "http://i.imgur.com/6WhKEKp.png",
+            "http://i.imgur.com/OnKX4Qm.png",
+            "http://i.imgur.com/K0xBuRC.png",
+            "http://i.imgur.com/sxIraEl.png",
+            "http://i.imgur.com/QZtfSDw.png",
+            "http://i.imgur.com/D38l4We.png",
+            "http://i.imgur.com/35yx5d0.png",
+            "http://i.imgur.com/rtnZ9v3.png",
+            "http://i.imgur.com/TlQQtb3.png",
+            "http://i.imgur.com/5XSLuJN.png",
+            "http://i.imgur.com/7Ygm7Az.png",
+            "http://i.imgur.com/L6Pu2vo.png",
+            "http://i.imgur.com/jQtWxXW.png",
+            "http://i.imgur.com/ofRrImR.png",
+            "http://i.imgur.com/iakl2wM.png",
+            "http://i.imgur.com/f5lTzrP.png",
+            "http://i.imgur.com/Ss9RF3x.png",
+            "http://i.imgur.com/15tfO5B.png",
+            "http://i.imgur.com/FM5J0gT.png"
     };
 
     @Override
@@ -76,15 +124,29 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
             ElementoBomberos nuevoElementoBomberos = new ElementoBomberos();
             nuevoElementoBomberos.setNombreElementoBomberos(nombreElementoBomberos[i]);
             nuevoElementoBomberos.setImagenElementoBomberos(imagenElementoBomberos[i]);
+            nuevoElementoBomberos.setCorrespondeElementoBomberos(correspondeElementoBomberos[i]);
             elementosBomberos.add(nuevoElementoBomberos);
         }
 
-        final ElementoBomberosAdapter adapter = new ElementoBomberosAdapter(this.getApplicationContext(), elementosBomberos, this);
+        long seed = System.nanoTime();
+        Collections.shuffle(elementosBomberos, new Random(seed));
+
+        final ArrayList<ElementoBomberos> matrizAleatoriaElementosBomberos = new ArrayList<>();
+
+        for(int i=0;i<12;i++) {
+            ElementoBomberos nuevoElementoBomberos = new ElementoBomberos();
+            nuevoElementoBomberos.setNombreElementoBomberos(elementosBomberos.get(i).getNombreElementoBomberos());
+            nuevoElementoBomberos.setImagenElementoBomberos(elementosBomberos.get(i).getImagenElementoBomberos());
+            nuevoElementoBomberos.setCorrespondeElementoBomberos(elementosBomberos.get(i).getCorrespondeElementoBomberos());
+            matrizAleatoriaElementosBomberos.add(nuevoElementoBomberos);
+        }
+
+        final ElementoBomberosAdapter adapter = new ElementoBomberosAdapter(this.getApplicationContext(), matrizAleatoriaElementosBomberos, this);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.listaElementosBomberos);
         recyclerView.setAdapter(adapter);
 
-        final int spanCount = 2;
+        final int spanCount = 3;
         final GridLayoutManager layoutManager = new GridLayoutManager(this.getApplicationContext(), spanCount);
         recyclerView.setLayoutManager(layoutManager);
 
