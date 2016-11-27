@@ -56,7 +56,7 @@ public class Bienvenida extends Activity {
                         startActivity(new Intent(getApplicationContext(), Login.class));
                         finish();
                     }
-                }, 2000);
+                }, 1000);
             }
 
             @Override

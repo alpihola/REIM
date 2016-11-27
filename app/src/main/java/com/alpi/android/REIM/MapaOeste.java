@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 public class MapaOeste extends Activity {
@@ -39,6 +42,7 @@ public class MapaOeste extends Activity {
                 | View.SYSTEM_UI_FLAG_IMMERSIVE);
 
         setContentView(R.layout.vista_mapa_oeste);
+
         irAlNorte = (Button) findViewById(R.id.botonIrAlNorte);
         irAlNorte.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,5 +79,27 @@ public class MapaOeste extends Activity {
             }
         });
 
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.animacion_boton_instrucciones);
+        instruccionDebemosLlegarAlMuseo.setAnimation(animation);
+
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                instruccionDebemosLlegarAlMuseo.startAnimation(animation);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+
+        });
+
     }
+
 }

@@ -9,6 +9,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import com.alpi.android.REIM.helper.OnStartDragListener;
@@ -161,6 +163,27 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
             public void onClick(View view) {
                 mediaPlayer.start();
             }
+        });
+
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.animacion_boton_instrucciones);
+        instruccionActividad002.setAnimation(animation);
+
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                instruccionActividad002.startAnimation(animation);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+
         });
 
         mostrarResultado = (Button) findViewById(R.id.botonMostrarResultado);
