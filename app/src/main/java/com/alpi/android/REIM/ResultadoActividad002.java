@@ -44,6 +44,7 @@ public class ResultadoActividad002 extends Activity {
 
         Bundle extras = getIntent().getExtras();
         String[] elementosBomberosFinales = extras.getStringArray("ELEMENTOS_BOMBEROS_FINALES");
+        final int valorGamificacion = extras.getInt("VALOR_GAMIFICACION");
 
         if (elementosBomberosFinales[0].equals("Vacío")) {
             resultado.append("El alumno no ha reconocido elementos del cuartel de bomberos");
@@ -62,6 +63,7 @@ public class ResultadoActividad002 extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ResultadoActividad002.this, MapaSur.class);
+                intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
                 startActivity(intent);
                 finish();
             }

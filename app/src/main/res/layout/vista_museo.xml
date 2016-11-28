@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_museo">
+
+    <ImageView
+        android:id="@+id/tickets"
+        android:layout_width="160dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="30dp" />
+
+    <Button
+        android:background="@drawable/boton_accion"
+        android:id="@+id/terminar"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="500dp"/>
+
+</RelativeLayout>

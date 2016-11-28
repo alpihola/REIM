@@ -123,6 +123,10 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
 
         setContentView(R.layout.vista_actividad_001);
 
+        Bundle extras = getIntent().getExtras();
+        final int valorGamificacionPrevio = extras.getInt("VALOR_GAMIFICACION");
+        final int valorGamificacionFinal = valorGamificacionPrevio + 1;
+
         final ArrayList<Alimento> alimentos = new ArrayList<>();
 
         for(int i=0;i<nombreAlimento.length;i++) {
@@ -179,10 +183,11 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
                     public void run() {
                         Intent intent = new Intent(Actividad001.this, ResultadoActividad001.class);
                         intent.putExtra("ALIMENTOS_FINALES", adapter.getResult());
+                        intent.putExtra("VALOR_GAMIFICACION", valorGamificacionFinal);
                         startActivity(intent);
                         finish();
                     }
-                }, 2000);
+                }, 1000);
             }
         });
 

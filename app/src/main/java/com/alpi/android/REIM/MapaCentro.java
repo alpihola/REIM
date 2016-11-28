@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class MapaCentro extends Activity {
 
@@ -16,6 +17,7 @@ public class MapaCentro extends Activity {
     Button irAlOeste;
     Button irAlSur;
     Button instruccionDebemosLlegarAlMuseo;
+    ImageView ticketsMuseo;
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -43,11 +45,24 @@ public class MapaCentro extends Activity {
 
         setContentView(R.layout.vista_mapa_centro);
 
+        Bundle extras = getIntent().getExtras();
+        final int valorGamificacion = extras.getInt("VALOR_GAMIFICACION");
+        ticketsMuseo = (ImageView) findViewById(R.id.tickets);
+
+        if(valorGamificacion == 0) {
+            ticketsMuseo.setImageResource(R.drawable.tickets_0);
+        } else if (valorGamificacion == 1) {
+            ticketsMuseo.setImageResource(R.drawable.tickets_1);
+        } else {
+            ticketsMuseo.setImageResource(R.drawable.tickets_2);
+        }
+
         irAlEste = (Button) findViewById(R.id.botonIrAlEste);
         irAlEste.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MapaCentro.this, MapaOeste.class);
+                intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
                 startActivity(intent);
             }
         });
@@ -57,6 +72,7 @@ public class MapaCentro extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MapaCentro.this, MapaNorte.class);
+                intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
                 startActivity(intent);
             }
         });
@@ -66,6 +82,7 @@ public class MapaCentro extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MapaCentro.this, MapaEste.class);
+                intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
                 startActivity(intent);
             }
         });
@@ -75,6 +92,7 @@ public class MapaCentro extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MapaCentro.this, MapaSur.class);
+                intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
                 startActivity(intent);
             }
         });

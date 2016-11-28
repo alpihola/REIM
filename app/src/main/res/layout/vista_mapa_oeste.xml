@@ -9,6 +9,14 @@
     tools:context=".MapaOeste">
 
     <ImageView
+        android:id="@+id/tickets"
+        android:layout_width="160dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="30dp" />
+
+    <ImageView
         android:id="@+id/casaInicio"
         android:background="@drawable/casa_inicio"
         android:layout_width="145dp"

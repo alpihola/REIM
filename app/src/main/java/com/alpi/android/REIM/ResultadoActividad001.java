@@ -44,6 +44,7 @@ public class ResultadoActividad001 extends Activity {
 
         Bundle extras = getIntent().getExtras();
         String[] alimentosFinales = extras.getStringArray("ALIMENTOS_FINALES");
+        final int valorGamificacion = extras.getInt("VALOR_GAMIFICACION");
 
         if (alimentosFinales[0].equals("Vacío")) {
             resultado.append("El alumno no ha escogido elementos saludables");
@@ -62,6 +63,7 @@ public class ResultadoActividad001 extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ResultadoActividad001.this, MapaNorte.class);
+                intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
                 startActivity(intent);
                 finish();
             }

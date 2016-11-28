@@ -121,6 +121,10 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
 
         setContentView(R.layout.vista_actividad_002);
 
+        Bundle extras = getIntent().getExtras();
+        final int valorGamificacionPrevio = extras.getInt("VALOR_GAMIFICACION");
+        final int valorGamificacionFinal = valorGamificacionPrevio + 1;
+
         ArrayList<ElementoBomberos> elementosBomberos = new ArrayList<>();
         for (int i = 0; i < nombreElementoBomberos.length; i++) {
             ElementoBomberos nuevoElementoBomberos = new ElementoBomberos();
@@ -178,10 +182,11 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
                     public void run() {
                         Intent intent = new Intent(Actividad002.this, ResultadoActividad002.class);
                         intent.putExtra("ELEMENTOS_BOMBEROS_FINALES", adapter.getResult());
+                        intent.putExtra("VALOR_GAMIFICACION", valorGamificacionFinal);
                         startActivity(intent);
                         finish();
                     }
-                }, 2000);
+                }, 1000);
             }
         });
 

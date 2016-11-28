@@ -8,6 +8,14 @@
     android:background="@drawable/fondo_mapa_este"
     tools:context=".MapaEste">
 
+    <ImageView
+        android:id="@+id/tickets"
+        android:layout_width="160dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="300dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp" />
+
     <Button
         android:layout_width="50dp"
         android:layout_height="50dp"

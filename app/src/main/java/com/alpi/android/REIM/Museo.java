@@ -2,14 +2,19 @@ package com.alpi.android.REIM;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 
-public class Login extends Activity {
 
-    Button Entrar;
-    int valorGamificacion = 0;
+public class Museo extends Activity {
+
+    Button terminar;
+    ImageView ticketsMuseo;
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -35,16 +40,46 @@ public class Login extends Activity {
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE);
 
-        setContentView(R.layout.vista_login);
-        Entrar = (Button) findViewById(R.id.button);
+        setContentView(R.layout.vista_museo);
 
-        Entrar.setOnClickListener(new View.OnClickListener() {
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.felicitaciones);
+        mediaPlayer.start();
+
+        Bundle extras = getIntent().getExtras();
+        final int valorGamificacion = extras.getInt("VALOR_GAMIFICACION");
+        ticketsMuseo = (ImageView) findViewById(R.id.tickets);
+        ticketsMuseo.setImageResource(R.drawable.tickets_0);
+
+        terminar = (Button) findViewById(R.id.terminar);
+        terminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Login.this, MapaOeste.class);
+                Intent intent = new Intent(Museo.this, MapaEste.class);
                 intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
                 startActivity(intent);
             }
         });
+
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.animacion_boton_instrucciones);
+        terminar.setAnimation(animation);
+
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                terminar.startAnimation(animation);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+
+        });
+
     }
 }

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class MapaEste extends Activity {
 
@@ -15,7 +16,8 @@ public class MapaEste extends Activity {
     Button irAlCentro;
     Button irAlSur;
     Button instruccionMiraMuseo;
-    Button instruccionRecolectarTickets;
+    Button museo;
+    ImageView ticketsMuseo;
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -42,11 +44,42 @@ public class MapaEste extends Activity {
                 | View.SYSTEM_UI_FLAG_IMMERSIVE);
 
         setContentView(R.layout.vista_mapa_este);
+
+        Bundle extras = getIntent().getExtras();
+        final int valorGamificacion = extras.getInt("VALOR_GAMIFICACION");
+        ticketsMuseo = (ImageView) findViewById(R.id.tickets);
+
+        if(valorGamificacion == 0) {
+            ticketsMuseo.setImageResource(R.drawable.tickets_0);
+        } else if (valorGamificacion == 1) {
+            ticketsMuseo.setImageResource(R.drawable.tickets_1);
+        } else {
+            ticketsMuseo.setImageResource(R.drawable.tickets_2);
+        }
+
+        museo = (Button) findViewById(R.id.botonMuseo);
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.para_entrar_museo);
+        museo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(valorGamificacion<2){
+                    mediaPlayer.start();
+                } else {
+                    final int valorGamificacion = 0;
+                    Intent intent = new Intent(MapaEste.this, Museo.class);
+                    intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
+                    startActivity(intent);
+                }
+
+            }
+        });
+
         irAlNorte = (Button) findViewById(R.id.botonIrAlNorte);
         irAlNorte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MapaEste.this, MapaNorte.class);
+                intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
                 startActivity(intent);
             }
         });
@@ -56,6 +89,7 @@ public class MapaEste extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MapaEste.this, MapaCentro.class);
+                intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
                 startActivity(intent);
             }
         });
@@ -65,16 +99,8 @@ public class MapaEste extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MapaEste.this, MapaSur.class);
+                intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
                 startActivity(intent);
-            }
-        });
-
-        instruccionRecolectarTickets = (Button) findViewById(R.id.botonMuseo);
-        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.para_entrar_museo);
-        instruccionRecolectarTickets.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mediaPlayer.start();
             }
         });
 
