@@ -29,7 +29,6 @@ implements ItemTouchHelperAdapter {
     private ArrayList<ElementoBomberos> elementosBomberos;
     private Context context;
     private final OnStartDragListener mDragStartListener;
-    int duracionToast = Toast.LENGTH_SHORT;
 
     public ElementoBomberosAdapter(Context context, ArrayList<ElementoBomberos> elementosBomberos, OnStartDragListener dragStartListener) {
         this.context = context;
@@ -110,10 +109,17 @@ implements ItemTouchHelperAdapter {
 
     }
 
-    public void getResult() {
-        String[] elementosBomberosFinales = new String[elementosBomberos.size()];
-        for (int i = 0; i < elementosBomberosFinales.length; i++){
-            elementosBomberosFinales[i] = elementosBomberos.get(i).getNombreElementoBomberos();
+    public String[] getResult() {
+        if(elementosBomberos.size() == 0) {
+            String[] elementosBomberosFinales = new String[1];
+            elementosBomberosFinales[0] = "Vacío";
+            return elementosBomberosFinales;
+        } else {
+            String[] elementosBomberosFinales = new String[elementosBomberos.size()];
+            for (int i = 0; i < elementosBomberosFinales.length; i++) {
+                elementosBomberosFinales[i] = elementosBomberos.get(i).getNombreElementoBomberos();
+            }
+            return elementosBomberosFinales;
         }
     }
 

@@ -27,7 +27,6 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
     Button instruccionActividad001;
     Button mostrarResultado;
 
-
     private final String nombreAlimento[] = {
             "Brócoli",
             "Taco",
@@ -195,12 +194,12 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
             @Override
             public void onClick(View view) {
                 adapter.getResult();
-
                 new Handler().postDelayed(new Runnable() {
 
                     @Override
                     public void run() {
-                        Intent intent = new Intent(Actividad001.this, MapaNorte.class);
+                        Intent intent = new Intent(Actividad001.this, ResultadoActividad001.class);
+                        intent.putExtra("ALIMENTOS_FINALES", adapter.getResult());
                         startActivity(intent);
                         finish();
                     }

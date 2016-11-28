@@ -69,7 +69,7 @@ public class MapaEste extends Activity {
             }
         });
 
-        instruccionRecolectarTickets = (Button) findViewById(R.id.botonMuseoActividadEsteban);
+        instruccionRecolectarTickets = (Button) findViewById(R.id.botonMuseo);
         final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.para_entrar_museo);
         instruccionRecolectarTickets.setOnClickListener(new View.OnClickListener() {
             @Override

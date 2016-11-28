@@ -12,7 +12,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.alpi.android.REIM.helper.ItemTouchHelperAdapter;
 import com.alpi.android.REIM.helper.ItemTouchHelperViewHolder;
@@ -31,7 +31,6 @@ implements ItemTouchHelperAdapter {
     private ArrayList<Alimento> alimentos;
     private Context context;
     private final OnStartDragListener mDragStartListener2;
-    int duracionToast = Toast.LENGTH_SHORT;
 
     public AlimentoAdapter(Context context, ArrayList<Alimento> alimentos, OnStartDragListener dragStartListener) {
         this.context = context;
@@ -115,10 +114,17 @@ implements ItemTouchHelperAdapter {
         }
     }
 
-    public void getResult() {
-        String[] alimentosFinales = new String[alimentos.size()];
-        for (int i = 0; i < alimentosFinales.length; i++){
-            alimentosFinales[i] = alimentos.get(i).getNombreAlimento();
-         }
+    public String[] getResult() {
+            if(alimentos.size() == 0) {
+                String[] alimentosFinales = new String[1];
+                alimentosFinales[0] = "Vacío";
+                return alimentosFinales;
+            } else {
+                String[] alimentosFinales = new String[alimentos.size()];
+                for (int i = 0; i < alimentosFinales.length; i++) {
+                    alimentosFinales[i] = alimentos.get(i).getNombreAlimento();
+                }
+                return alimentosFinales;
+            }
     }
 }

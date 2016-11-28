@@ -196,7 +196,8 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
 
                     @Override
                     public void run() {
-                        Intent intent = new Intent(Actividad002.this, MapaSur.class);
+                        Intent intent = new Intent(Actividad002.this, ResultadoActividad002.class);
+                        intent.putExtra("ELEMENTOS_BOMBEROS_FINALES", adapter.getResult());
                         startActivity(intent);
                         finish();
                     }
