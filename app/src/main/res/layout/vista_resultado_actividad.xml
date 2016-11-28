@@ -3,7 +3,8 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:background="#ffffffff">
 
     <TextView
         android:layout_width="wrap_content"
@@ -13,12 +14,14 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="40dp"
-        android:layout_height="40dp"
         android:background="@drawable/boton_accion"
-        android:id="@+id/botonMostrarResultado"
-        android:layout_alignParentBottom="true"
+        android:id="@+id/botonContinuar"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="500dp" />
 
 </RelativeLayout>

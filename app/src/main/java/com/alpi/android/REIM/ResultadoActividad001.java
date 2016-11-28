@@ -4,13 +4,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class ResultadoActividad001 extends Activity {
 
     TextView resultado;
-    Button continuar;
+    Button boton_continuar;
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -55,14 +57,35 @@ public class ResultadoActividad001 extends Activity {
         }
         }
 
-        continuar = (Button) findViewById(R.id.botonMostrarResultado);
-        continuar.setOnClickListener(new View.OnClickListener() {
+        boton_continuar = (Button) findViewById(R.id.botonContinuar);
+        boton_continuar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ResultadoActividad001.this, MapaNorte.class);
                 startActivity(intent);
                 finish();
             }
+        });
+
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.animacion_boton_instrucciones);
+        boton_continuar.setAnimation(animation);
+
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                boton_continuar.startAnimation(animation);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+
         });
 
     }

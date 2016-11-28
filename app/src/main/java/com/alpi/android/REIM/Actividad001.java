@@ -168,27 +168,6 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
             }
         });
 
-        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.animacion_boton_instrucciones);
-        instruccionActividad001.setAnimation(animation);
-
-        animation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                instruccionActividad001.startAnimation(animation);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-
-        });
-
         mostrarResultado = (Button) findViewById(R.id.botonMostrarResultado);
         mostrarResultado.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,6 +184,29 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
                     }
                 }, 2000);
             }
+        });
+
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.animacion_boton_instrucciones);
+        instruccionActividad001.setAnimation(animation);
+        mostrarResultado.setAnimation(animation);
+
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                instruccionActividad001.startAnimation(animation);
+                mostrarResultado.startAnimation(animation);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+
         });
     }
 
