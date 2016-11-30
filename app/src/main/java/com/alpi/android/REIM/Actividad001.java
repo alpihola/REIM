@@ -191,6 +191,7 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
             }
         });
 
+
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.animacion_boton_instrucciones);
         instruccionActividad001.setAnimation(animation);
         mostrarResultado.setAnimation(animation);

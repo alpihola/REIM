@@ -12,9 +12,9 @@ import android.widget.ImageView;
 
 public class MapaNorte extends Activity {
 
+    Button irAlOeste;
     Button irAlEste;
     Button irAlCentro;
-    Button irAlOeste;
     Button casaActividad001;
     Button instruccionMiraCasa;
     ImageView ticketsMuseo;
@@ -57,6 +57,16 @@ public class MapaNorte extends Activity {
             ticketsMuseo.setImageResource(R.drawable.tickets_2);
         }
 
+        irAlOeste = (Button) findViewById(R.id.botonIrAlEste);
+        irAlOeste.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MapaNorte.this, MapaEste.class);
+                intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
+                startActivity(intent);
+            }
+        });
+
         irAlEste = (Button) findViewById(R.id.botonIrAlOeste);
         irAlEste.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,17 +86,6 @@ public class MapaNorte extends Activity {
                 startActivity(intent);
             }
         });
-
-        irAlOeste = (Button) findViewById(R.id.botonIrAlEste);
-        irAlOeste.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MapaNorte.this, MapaEste.class);
-                intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
-                startActivity(intent);
-            }
-        });
-
 
         casaActividad001 = (Button) findViewById(R.id.botonCasaActividad001);
         casaActividad001.setOnClickListener(new View.OnClickListener() {

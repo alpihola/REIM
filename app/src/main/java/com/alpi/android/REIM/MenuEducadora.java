@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class Login extends Activity {
+public class MenuEducadora extends Activity {
 
-    Button iniciarSesion;
+    Button iniciarREIM;
+    Button continuarREIM;
+    int valorGamificacion = 0;
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -34,13 +36,14 @@ public class Login extends Activity {
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE);
 
-        setContentView(R.layout.vista_login);
-        iniciarSesion = (Button) findViewById(R.id.botonIniciarSesion);
+        setContentView(R.layout.vista_menu_educadora);
+        iniciarREIM = (Button) findViewById(R.id.botonIniciarSesion);
 
-        iniciarSesion.setOnClickListener(new View.OnClickListener() {
+        iniciarREIM.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Login.this, MenuEducadora.class);
+                Intent intent = new Intent(MenuEducadora.this, MapaOeste.class);
+                intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
                 startActivity(intent);
             }
         });

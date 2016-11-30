@@ -57,23 +57,6 @@ public class MapaEste extends Activity {
             ticketsMuseo.setImageResource(R.drawable.tickets_2);
         }
 
-        museo = (Button) findViewById(R.id.botonMuseo);
-        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.para_entrar_museo);
-        museo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(valorGamificacion<2){
-                    mediaPlayer.start();
-                } else {
-                    final int valorGamificacion = 0;
-                    Intent intent = new Intent(MapaEste.this, Museo.class);
-                    intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
-                    startActivity(intent);
-                }
-
-            }
-        });
-
         irAlNorte = (Button) findViewById(R.id.botonIrAlNorte);
         irAlNorte.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +93,23 @@ public class MapaEste extends Activity {
             @Override
             public void onClick(View view) {
                 mediaPlayer2.start();
+            }
+        });
+
+        museo = (Button) findViewById(R.id.botonMuseo);
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.para_entrar_museo);
+        museo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(valorGamificacion<2){
+                    mediaPlayer.start();
+                } else {
+                    final int valorGamificacion = 0;
+                    Intent intent = new Intent(MapaEste.this, Museo.class);
+                    intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
+                    startActivity(intent);
+                }
+
             }
         });
 
