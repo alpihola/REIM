@@ -2,9 +2,10 @@ package com.alpi.android.REIM;
 
 public class Usuario {
 
-    int _id;
-    String nombreUsuario;
-    String rut;
+    private int idUsuario;
+    private String rut;
+    private String nombreUsuario;
+    private String apellidoPaterno;
 
     //Constructor vacío
     public Usuario() {
@@ -12,23 +13,25 @@ public class Usuario {
     }
 
     //Constructor de la clase
-    public Usuario(int id, String nombreUsuario, String rut) {
-        this._id = id;
-        this.nombreUsuario = nombreUsuario;
+    public Usuario(int idUsuario, String nombreUsuario, String rut, String apellidoPaterno) {
+        this.idUsuario = idUsuario;
         this.rut = rut;
-    }
-
-    public Usuario(String nombreUsuario, String rut) {
         this.nombreUsuario = nombreUsuario;
+        this.apellidoPaterno = apellidoPaterno;
+    }
+
+    public Usuario(String nombreUsuario, String rut, String apellidoPaterno) {
         this.rut = rut;
+        this.nombreUsuario = nombreUsuario;
+        this.apellidoPaterno = apellidoPaterno;
     }
 
-    public int get_id() {
-        return this._id;
+    public int getIdUsuario() {
+        return this.idUsuario;
     }
 
-    public void set_id(int id) {
-        this._id = id;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNombreUsuario() {
@@ -47,4 +50,21 @@ public class Usuario {
         this.rut = rut;
     }
 
+    public String getApellidoPaterno() {
+        return this.apellidoPaterno;
+    }
+
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = apellidoPaterno;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "idUsuario=" + idUsuario +
+                ", rut='" + rut + '\'' +
+                ", nombreUsuario='" + nombreUsuario + '\'' +
+                ", apellidoPaterno='" + apellidoPaterno + '\'' +
+                '}';
+    }
 }

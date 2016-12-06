@@ -37,6 +37,7 @@ public class MenuEducadora extends Activity {
                 | View.SYSTEM_UI_FLAG_IMMERSIVE);
 
         setContentView(R.layout.vista_menu_educadora);
+
         iniciarREIM = (Button) findViewById(R.id.botonIniciarSesion);
 
         iniciarREIM.setOnClickListener(new View.OnClickListener() {
