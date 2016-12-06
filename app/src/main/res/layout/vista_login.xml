@@ -9,31 +9,32 @@
     android:background="@drawable/fondo_login">
 
 
-    <TextView
+    <EditText
         android:id="@+id/ingresaUsuario"
         android:layout_width="300dp"
         android:background="@drawable/esquinas_redondas"
         android:layout_height="80dp"
-        android:textSize="45sp"
-        android:textColor="#07000000"
+        android:textSize="42sp"
+        android:textColor="#000000"
+        android:hint="  Usuario"
         android:textAlignment="center"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="178dp"
-        android:text="Usuario"/>
+        android:layout_marginTop="178dp" />
 
-    <TextView
+    <EditText
         android:id="@+id/ingresaPassword"
         android:layout_width="300dp"
         android:background="@drawable/esquinas_redondas"
         android:layout_height="80dp"
-        android:textSize="45sp"
-        android:textColor="#07000000"
+        android:textSize="42sp"
+        android:textColor="#000000"
+        android:hint=" Contraseña"
+        android:inputType="textPassword"
         android:textAlignment="center"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="278dp"
-        android:text="Contraseña"/>
+        android:layout_marginTop="278dp" />
 
     <Button
         android:id="@+id/botonIniciarSesion"
@@ -45,5 +46,11 @@
         android:layout_marginRight="40dp"
         android:layout_marginEnd="40dp"
         android:layout_marginTop="500dp"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"/>
 
 </RelativeLayout>

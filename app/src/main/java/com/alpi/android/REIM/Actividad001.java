@@ -2,6 +2,7 @@ package com.alpi.android.REIM;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,10 @@ import android.widget.Button;
 import com.alpi.android.REIM.helper.OnStartDragListener;
 import com.alpi.android.REIM.helper.SimpleItemTouchHelperCallback;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;

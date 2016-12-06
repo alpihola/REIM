@@ -2,6 +2,7 @@ package com.alpi.android.REIM;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,6 +21,10 @@ import com.alpi.android.REIM.helper.OnStartDragListener;
 import com.squareup.picasso.Picasso;
 
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -31,6 +36,7 @@ implements ItemTouchHelperAdapter {
     private ArrayList<Alimento> alimentos;
     private Context context;
     private final OnStartDragListener mDragStartListener2;
+    int correcto;
 
     public AlimentoAdapter(Context context, ArrayList<Alimento> alimentos, OnStartDragListener dragStartListener) {
         this.context = context;
@@ -67,9 +73,16 @@ implements ItemTouchHelperAdapter {
         if(alimentos.get(position).getCorrespondeAlimento()) {
             final MediaPlayer mediaPlayer = MediaPlayer.create(context, R.raw.no_corresponde);
             mediaPlayer.start();
+            correcto = 0;
+            consulta cno = new consulta();
+            cno.execute();
+
         } else {
             final MediaPlayer mediaPlayer = MediaPlayer.create(context, R.raw.corresponde);
             mediaPlayer.start();
+            correcto = 1;
+            consulta c = new consulta();
+            c.execute();
         }
         alimentos.remove(position);
         notifyItemRemoved(position);
@@ -126,5 +139,41 @@ implements ItemTouchHelperAdapter {
                 }
                 return alimentosFinales;
             }
+    }
+
+    private class consulta extends AsyncTask<Void, Void, Void> {
+
+
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+
+            try {
+
+                //conexion
+                Class.forName("com.mysql.jdbc.Driver");
+                String url = "jdbc:mysql://mysql.ulearnet.com:3306/ulearnet_des";//"jdbc:mysql:///10.0.3.2:3306/dbname"
+                Connection c = DriverManager.getConnection(url, "ulearnet_des", "ulearnet_des@");
+
+                //declaro el statement con la query para despues ejecutarla
+                PreparedStatement st = c.prepareStatement("INSERT INTO ALUMNO_REALIZA_ACTIVIDAD (correcto, ACTIVIDAD_id_actividad, ASIGNA" +
+                        "_REALIZAR_SESION_id_sesion) VALUES (?, 4, 19)");
+                st.setInt(1, correcto);
+
+
+
+                st.execute();//se ejecuta la query
+                st.close();//cierro el statement con la query
+                c.close();//cierro la conexion
+
+            } catch (ClassNotFoundException | SQLException e) {
+                e.printStackTrace();
+
+            }
+
+
+            return null;
+        }
     }
 }
