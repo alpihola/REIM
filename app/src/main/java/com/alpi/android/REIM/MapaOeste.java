@@ -17,6 +17,8 @@ public class MapaOeste extends Activity {
     Button irAlSur;
     Button instruccionDebemosLLegarMuseo;
     ImageView ticketsMuseo;
+    static String fechaInicioSesion;
+    Fecha fecha = new Fecha();
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -46,6 +48,7 @@ public class MapaOeste extends Activity {
 
         Bundle extras = getIntent().getExtras();
         final int valorGamificacion = extras.getInt("VALOR_GAMIFICACION");
+        fechaInicioSesion = fecha.fechaActual;
         ticketsMuseo = (ImageView) findViewById(R.id.tickets);
 
         if(valorGamificacion == 0) {
@@ -117,5 +120,4 @@ public class MapaOeste extends Activity {
         });
 
     }
-
 }

@@ -153,6 +153,7 @@ public class AlimentoAdapter extends RecyclerView.Adapter<AlimentoAdapter.ViewHo
                 String url = "jdbc:mysql://mysql.ulearnet.com:3306/ulearnet_des";//"jdbc:mysql:///10.0.3.2:3306/dbname"
                 Connection connection = DriverManager.getConnection(url, "ulearnet_des", "ulearnet_des@");
 
+
                 //declaro el statement con la query para despues ejecutarla
                 PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ALUMNO_REALIZA_ACTIVIDAD (correcto, ACTIVIDAD_id_actividad, ASIGNA" +
                         "_REALIZAR_SESION_id_sesion) VALUES (?, 4, 19)");

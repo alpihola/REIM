@@ -126,6 +126,5 @@ public class MapaNorte extends Activity {
             }
 
         });
-
     }
 }

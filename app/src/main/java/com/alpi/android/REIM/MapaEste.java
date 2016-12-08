@@ -104,7 +104,6 @@ public class MapaEste extends Activity {
                 if(valorGamificacion<2){
                     mediaPlayer.start();
                 } else {
-                    final int valorGamificacion = 0;
                     Intent intent = new Intent(MapaEste.this, Museo.class);
                     intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
                     startActivity(intent);
