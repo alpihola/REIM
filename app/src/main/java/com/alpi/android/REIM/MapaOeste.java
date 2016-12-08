@@ -44,9 +44,8 @@ public class MapaOeste extends Activity {
 
         setContentView(R.layout.vista_mapa_oeste);
 
-        //Bundle extras = getIntent().getExtras();
-        //final int valorGamificacion = extras.getInt("VALOR_GAMIFICACION");
-        final int valorGamificacion = 0;
+        Bundle extras = getIntent().getExtras();
+        final int valorGamificacion = extras.getInt("VALOR_GAMIFICACION");
         ticketsMuseo = (ImageView) findViewById(R.id.tickets);
 
         if(valorGamificacion == 0) {

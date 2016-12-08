@@ -30,6 +30,7 @@ public class SeleccionarAlumno extends AppCompatActivity {
     ArrayAdapter<String> arrayAdapter;
     ListView listViewAlumnos;
     SeleccionarCurso seleccionarCurso = new SeleccionarCurso();
+    final int valorGamificacion = 0;
 
     static String elemento_lista_alumno;
     static int id_curso;
@@ -99,6 +100,7 @@ public class SeleccionarAlumno extends AppCompatActivity {
                 if (elemento_lista_alumno != null) {
                     fecha_inicio = fecha.fechaActual;
                     Intent intent = new Intent(SeleccionarAlumno.this, MapaOeste.class);
+                    intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
                     startActivity(intent);
                 }
             }
