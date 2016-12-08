@@ -6,11 +6,11 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".Bienvenida"
-            android:label="@string/app_name">
-
+            android:label="@string/app_name"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,62 +20,80 @@
 
         <activity
             android:name=".Login"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="landscape">
         </activity>
 
         <activity
-            android:name=".MenuEducadora"
-            android:label="@string/app_name">
+            android:name=".SeleccionarCurso"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape">
+        </activity>
+
+        <activity
+            android:name=".SeleccionarAlumno"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape">
         </activity>
 
         <activity
             android:name=".ResultadoActividad001"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="landscape">
         </activity>
 
         <activity
             android:name=".ResultadoActividad002"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="landscape">
         </activity>
 
         <activity
             android:name=".Museo"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="landscape">
         </activity>
 
         <activity
             android:name=".MapaOeste"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="landscape">
         </activity>
 
         <activity
             android:name=".MapaNorte"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="landscape">
         </activity>
 
         <activity
             android:name=".MapaCentro"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="landscape">
         </activity>
 
         <activity
             android:name=".MapaSur"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="landscape">
         </activity>
 
         <activity
             android:name=".MapaEste"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="landscape">
         </activity>
 
         <activity
             android:name=".Actividad001"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="landscape">
         </activity>
 
         <activity
             android:name=".Actividad002"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="landscape">
         </activity>
 
     </application>

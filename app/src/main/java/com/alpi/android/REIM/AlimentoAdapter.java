@@ -31,14 +31,14 @@ import java.util.Random;
 
 
 public class AlimentoAdapter extends RecyclerView.Adapter<AlimentoAdapter.ViewHolder>
-implements ItemTouchHelperAdapter {
+        implements ItemTouchHelperAdapter {
 
     private ArrayList<Alimento> alimentos;
     private Context context;
     private final OnStartDragListener mDragStartListener2;
-    int correcto;
+    private int correcto;
 
-    public AlimentoAdapter(Context context, ArrayList<Alimento> alimentos, OnStartDragListener dragStartListener) {
+        AlimentoAdapter(Context context, ArrayList<Alimento> alimentos, OnStartDragListener dragStartListener) {
         this.context = context;
         this.alimentos = alimentos;
         mDragStartListener2 = dragStartListener;
@@ -128,50 +128,43 @@ implements ItemTouchHelperAdapter {
     }
 
     public String[] getResult() {
-            if(alimentos.size() == 0) {
-                String[] alimentosFinales = new String[1];
-                alimentosFinales[0] = "Vacío";
-                return alimentosFinales;
-            } else {
-                String[] alimentosFinales = new String[alimentos.size()];
-                for (int i = 0; i < alimentosFinales.length; i++) {
-                    alimentosFinales[i] = alimentos.get(i).getNombreAlimento();
-                }
-                return alimentosFinales;
+        if(alimentos.size() == 0) {
+            String[] alimentosFinales = new String[1];
+            alimentosFinales[0] = "Vacío";
+            return alimentosFinales;
+        } else {
+            String[] alimentosFinales = new String[alimentos.size()];
+            for (int i = 0; i < alimentosFinales.length; i++) {
+                alimentosFinales[i] = alimentos.get(i).getNombreAlimento();
             }
+            return alimentosFinales;
+        }
     }
 
     private class consulta extends AsyncTask<Void, Void, Void> {
 
-
-
         @Override
         protected Void doInBackground(Void... params) {
-
 
             try {
 
                 //conexion
                 Class.forName("com.mysql.jdbc.Driver");
                 String url = "jdbc:mysql://mysql.ulearnet.com:3306/ulearnet_des";//"jdbc:mysql:///10.0.3.2:3306/dbname"
-                Connection c = DriverManager.getConnection(url, "ulearnet_des", "ulearnet_des@");
+                Connection connection = DriverManager.getConnection(url, "ulearnet_des", "ulearnet_des@");
 
                 //declaro el statement con la query para despues ejecutarla
-                PreparedStatement st = c.prepareStatement("INSERT INTO ALUMNO_REALIZA_ACTIVIDAD (correcto, ACTIVIDAD_id_actividad, ASIGNA" +
+                PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ALUMNO_REALIZA_ACTIVIDAD (correcto, ACTIVIDAD_id_actividad, ASIGNA" +
                         "_REALIZAR_SESION_id_sesion) VALUES (?, 4, 19)");
-                st.setInt(1, correcto);
+                preparedStatement.setInt(1, correcto);
 
-
-
-                st.execute();//se ejecuta la query
-                st.close();//cierro el statement con la query
-                c.close();//cierro la conexion
+                preparedStatement.execute();//se ejecuta la query
+                preparedStatement.close();//cierro el statement con la query
+                connection.close();//cierro la conexion
 
             } catch (ClassNotFoundException | SQLException e) {
                 e.printStackTrace();
-
             }
-
 
             return null;
         }

@@ -12,15 +12,12 @@ import android.widget.Toast;
 
 import java.sql.Statement;
 import java.sql.Connection;
-
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 
 public class Login extends Activity {
 
     Button iniciarSesion;
-    /*TextView ingresaUsuario;
-    TextView ingresaPassword; */
     EditText usuario;
     EditText pass;
     static int id_usuario;
@@ -63,95 +60,100 @@ public class Login extends Activity {
         iniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent = new Intent(Login.this, MenuEducadora.class);
-                startActivity(intent); */
-                DoLogin doLogin = new DoLogin();
-                doLogin.execute("");
+                IniciarSesion iniciarSesion = new IniciarSesion();
+                iniciarSesion.execute("");
             }
         });
     }
 
-        public class DoLogin extends AsyncTask<String, String, String> {
-            String z = "";
-            Boolean isSuccess = false;
+    public class IniciarSesion extends AsyncTask<String, String, String> {
+        String toast = "";
+        Boolean isSuccess = false;
 
 
-            String user = usuario.getText().toString();
-            String password = pass.getText().toString();
+        String user = usuario.getText().toString();
+        String password = pass.getText().toString();
 
 
-            @Override
-            protected void onPreExecute() {
-                progressBar.setVisibility(View.VISIBLE);
+        @Override
+        protected void onPreExecute() {
+            progressBar.setVisibility(View.VISIBLE);
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE);
+        }
+
+        @Override
+        protected void onPostExecute(String toast) {
+            progressBar.setVisibility(View.GONE);
+            Toast.makeText(Login.this, toast, Toast.LENGTH_SHORT).show();
+
+            if (isSuccess) {
+                Intent intent = new Intent(Login.this, SeleccionarCurso.class);
+                startActivity(intent);
+                finish();
             }
 
-            @Override
-            protected void onPostExecute(String r) {
-                progressBar.setVisibility(View.GONE);
-                Toast.makeText(Login.this, r, Toast.LENGTH_SHORT).show();
+        }
 
-                if (isSuccess) {
-                    Intent intent = new Intent(Login.this, MenuEducadora.class);
-                    startActivity(intent);
-                    finish();
-                }
+        @Override
+        protected String doInBackground(String... params) {
+            if (user.trim().equals("") || password.trim().equals(""))
+                toast = "Por favor ingrese un Usuario y una Contraseña";
+            else {
+                try {
 
-            }
+                    Class.forName("com.mysql.jdbc.Driver");
+                    String url = "jdbc:mysql://mysql.ulearnet.com:3306/ulearnet_des";
+                    Connection con = DriverManager.getConnection(url, "ulearnet_des", "ulearnet_des@");
 
-            @Override
-            protected String doInBackground(String... params) {
-                if (user.trim().equals("") || password.trim().equals(""))
-                    z = "Por favor ingrese un Usuario y una Contraseña";
-                else {
-                    try {
+                    if (con == null) {
+                        toast = "Error en la conexion con el servidor de Ulearnet";
+                    } else {
 
-                        Class.forName("com.mysql.jdbc.Driver");
-                        String url = "jdbc:mysql://mysql.ulearnet.com:3306/ulearnet_des";
-                        Connection con = DriverManager.getConnection(url, "ulearnet_des", "ulearnet_des@");
+                        String query = "select id, salt, password from sf_guard_user where username= '" + user + "'";
 
-                        if (con == null) {
-                            z = "Error en la conexion con el servidor de Ulearnet";
-                        } else {
-
-                            String query = "select id, salt, password from sf_guard_user where username= '" + user + "'";
-
-                            Statement stmt = con.createStatement();
-                            ResultSet rs = stmt.executeQuery(query);
+                        Statement stmt = con.createStatement();
+                        ResultSet rs = stmt.executeQuery(query);
 
 
-                            if (rs.next()) {
+                        if (rs.next()) {
 
-                                id_usuario = rs.getInt("id");
-                                salt = rs.getString("salt");
-                                passwordBD = rs.getString("password");
-                            }
-
-                            passwordEncrypted = salt + password;
-                            System.out.println(passwordEncrypted);
-                            passwordFinal = hashText.sha1(passwordEncrypted);
-
-                            String query2 = "select * from sf_guard_user where username= '" + user + "' and password = '" + passwordFinal + "' ";
-
-                            Statement stm2 = con.prepareStatement(query2);
-                            ResultSet rs2 = stm2.executeQuery(query2);
-
-                            if (rs2.next()) {
-
-                                z = "Login Exitoso!";
-                                isSuccess = true;
-
-                            } else {
-                                z = "Usuario o Contraseña incorrectos";
-                                isSuccess = false;
-                            }
-
+                            id_usuario = rs.getInt("id");
+                            salt = rs.getString("salt");
+                            passwordBD = rs.getString("password");
                         }
-                    } catch (Exception ex) {
-                        isSuccess = false;
-                        z = "Exceptions";
+
+                        passwordEncrypted = salt + password;
+                        System.out.println(passwordEncrypted);
+                        passwordFinal = hashText.sha1(passwordEncrypted);
+
+                        String query2 = "select * from sf_guard_user where username= '" + user + "' and password = '" + passwordFinal + "' ";
+
+                        Statement stm2 = con.prepareStatement(query2);
+                        ResultSet rs2 = stm2.executeQuery(query2);
+
+                        if (rs2.next()) {
+
+                            toast = "Login Exitoso!";
+                            isSuccess = true;
+
+                        } else {
+                            toast = "Usuario o Contraseña incorrectos";
+                            isSuccess = false;
+                        }
+
                     }
+                } catch (Exception ex) {
+                    isSuccess = false;
+                    toast = "Exceptions";
                 }
-                return z;
             }
+
+            return toast;
         }
     }
+}

@@ -41,16 +41,19 @@
         android:layout_width="272dp"
         android:layout_height="75dp"
         android:background="@drawable/boton_iniciar_sesion"
+        android:layout_marginRight="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginTop="500dp"/>
+        android:layout_marginBottom="70dp" />
 
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center|bottom"/>
+        android:layout_gravity="center|bottom"
+        android:layout_above="@+id/botonIniciarSesion"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
