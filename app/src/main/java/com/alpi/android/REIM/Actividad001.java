@@ -25,7 +25,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -35,12 +34,12 @@ import static com.alpi.android.REIM.Museo.id_sesion;
 public class Actividad001 extends AppCompatActivity implements OnStartDragListener {
 
     private ItemTouchHelper mItemTouchHelper;
-    Button instruccionActividad001;
-    Button finalizarActividad;
+    Button instruccionActividad001, finalizarActividad;
     static String fechaInicioActividad, fechaTerminoActividad, fechaDismiss, matrizInicial, matrizFinal;
     Fecha datetimeInicioActividad = new Fecha();
     private int correcto = 0;
-    int id_matriz;
+    int id_matriz, contadorTouch, contadorInstruccionesActividad;
+    int contadorClickInstrucciones;
 
     private final String nombreAlimento[] = {
             "Brócoli",
@@ -139,6 +138,8 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
         setContentView(R.layout.vista_actividad_001);
 
         Bundle extras = getIntent().getExtras();
+        final int contadorClickMapa = extras.getInt("CONTADOR_CLICK_MAPA");
+        final int contadorClickInstruccionesIn = extras.getInt("CONTADOR_CLICK_INSTRUCCIONES");
         final int valorGamificacionPrevio = extras.getInt("VALOR_GAMIFICACION");
         final int valorGamificacionFinal = valorGamificacionPrevio + 1;
         fechaInicioActividad = datetimeInicioActividad.fechaActual;
@@ -185,6 +186,8 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
             @Override
             public void onClick(View view) {
                 mediaPlayer.start();
+                contadorInstruccionesActividad += 1;
+                contadorClickInstrucciones += 1;
             }
         });
 
@@ -205,7 +208,10 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        final int contadorClickInstruccionesOut = contadorClickInstruccionesIn + contadorClickInstrucciones;
                         Intent intent = new Intent(Actividad001.this, MapaNorte.class);
+                        intent.putExtra("CONTADOR_CLICK_MAPA", contadorClickMapa);
+                        intent.putExtra("CONTADOR_CLICK_INSTRUCCIONES", contadorClickInstruccionesOut);
                         intent.putExtra("VALOR_GAMIFICACION", valorGamificacionFinal);
                         startActivity(intent);
                         finish();
@@ -246,6 +252,7 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
         mItemTouchHelper.startSwipe(viewHolder);
         Fecha datetimeDismiss = new Fecha();
         fechaDismiss = datetimeDismiss.fechaActual;
+        contadorTouch += 1;
     }
 
     public class consulta extends AsyncTask<Void, Void, Void> {
@@ -257,7 +264,7 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
 
                 //conexion
                 Class.forName("com.mysql.jdbc.Driver");
-                String url = "jdbc:mysql://mysql.ulearnet.com:3306/ulearnet_des";//"jdbc:mysql:///10.0.3.2:3306/dbname"
+                String url = "jdbc:mysql://mysql.ulearnet.com:3306/ulearnet_des";
                 Connection connection = DriverManager.getConnection(url, "ulearnet_des", "ulearnet_des@");
 
                 String getSesion = "SELECT id_sesion FROM ASIGNA_REALIZAR_SESION ORDER BY id_sesion DESC LIMIT 1";
@@ -288,13 +295,16 @@ public class Actividad001 extends AppCompatActivity implements OnStartDragListen
                 //declaro el statement con la query para despues ejecutarla
                 PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ALUMNO_REALIZA_ACTIVIDAD " +
                         "(datetime_inicio_actividad, datetime_touch, datetime_termino_actividad, correcto, ACTIVIDAD_id_actividad, ASIGNA" +
-                        "_REALIZAR_SESION_id_sesion, MATRIZ_ELEMENTO_id_matriz) VALUES (?, ?, ?, ?, 4, ?, ?)");
+                        "_REALIZAR_SESION_id_sesion, MATRIZ_ELEMENTO_id_matriz, contador_click_totales, contador_click_instrucciones)" +
+                        " VALUES (?, ?, ?, ?, 4, ?, ?, ?, ?)");
                 preparedStatement.setString(1, fechaInicioActividad);
                 preparedStatement.setString(2, fechaDismiss);
                 preparedStatement.setString(3, fechaTerminoActividad);
                 preparedStatement.setInt(4, correcto);
                 preparedStatement.setInt(5, id_sesion);
                 preparedStatement.setInt(6, id_matriz);
+                preparedStatement.setInt(7, contadorTouch);
+                preparedStatement.setInt(8, contadorInstruccionesActividad);
 
                 preparedStatement.execute();//se ejecuta la query
                 preparedStatement.close();//cierro el statement con la query

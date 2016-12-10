@@ -33,12 +33,12 @@ import static com.alpi.android.REIM.Museo.id_sesion;
 public class Actividad002 extends AppCompatActivity implements OnStartDragListener {
 
     private ItemTouchHelper mItemTouchHelper;
-    Button instruccionActividad002;
-    Button finalizarActividad;
+    Button instruccionActividad002, finalizarActividad;
     static String fechaInicioActividad, fechaTerminoActividad, fechaDismiss, matrizInicial, matrizFinal;
     Fecha datetimeInicioActividad = new Fecha();
     private int correcto = 0;
-    int id_matriz;
+    int id_matriz, contadorTouch, contadorInstruccionesActividad;
+    int contadorClickInstrucciones;
 
     private final String nombreElementoBomberos[] = {
             "Botas",
@@ -136,6 +136,8 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
         setContentView(R.layout.vista_actividad_002);
 
         Bundle extras = getIntent().getExtras();
+        final int contadorClickMapa = extras.getInt("CONTADOR_CLICK_MAPA");
+        final int contadorClickInstruccionesIn = extras.getInt("CONTADOR_CLICK_INSTRUCCIONES");
         final int valorGamificacionPrevio = extras.getInt("VALOR_GAMIFICACION");
         final int valorGamificacionFinal = valorGamificacionPrevio + 1;
         fechaInicioActividad = datetimeInicioActividad.fechaActual;
@@ -181,9 +183,10 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
             @Override
             public void onClick(View view) {
                 mediaPlayer.start();
+                contadorInstruccionesActividad += 1;
+                contadorClickInstrucciones += 1;
             }
         });
-
 
         finalizarActividad = (Button) findViewById(R.id.botonMostrarResultado);
         finalizarActividad.setOnClickListener(new View.OnClickListener() {
@@ -203,7 +206,10 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
 
                     @Override
                     public void run() {
+                        final int contadorClickInstruccionesOut = contadorClickInstruccionesIn + contadorClickInstrucciones;
                         Intent intent = new Intent(Actividad002.this, MapaSur.class);
+                        intent.putExtra("CONTADOR_CLICK_MAPA", contadorClickMapa);
+                        intent.putExtra("CONTADOR_CLICK_INSTRUCCIONES", contadorClickInstruccionesOut);
                         intent.putExtra("VALOR_GAMIFICACION", valorGamificacionFinal);
                         startActivity(intent);
                         finish();
@@ -244,6 +250,7 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
         mItemTouchHelper.startSwipe(viewHolder);
         Fecha datetimeDismiss = new Fecha();
         fechaDismiss = datetimeDismiss.fechaActual;
+        contadorTouch += 1;
     }
 
     public class consulta extends AsyncTask<Void, Void, Void> {
@@ -286,13 +293,16 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
                 //declaro el statement con la query para despues ejecutarla
                 PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ALUMNO_REALIZA_ACTIVIDAD " +
                         "(datetime_inicio_actividad, datetime_touch, datetime_termino_actividad, correcto, ACTIVIDAD_id_actividad, ASIGNA" +
-                        "_REALIZAR_SESION_id_sesion, MATRIZ_ELEMENTO_id_matriz) VALUES (?, ?, ?, ?, 5, ?, ?)");
+                        "_REALIZAR_SESION_id_sesion, MATRIZ_ELEMENTO_id_matriz, contador_click_totales, contador_click_instrucciones)" +
+                        " VALUES (?, ?, ?, ?, 5, ?, ?, ?, ?)");
                 preparedStatement.setString(1, fechaInicioActividad);
                 preparedStatement.setString(2, fechaDismiss);
                 preparedStatement.setString(3, fechaTerminoActividad);
                 preparedStatement.setInt(4, correcto);
                 preparedStatement.setInt(5, id_sesion);
                 preparedStatement.setInt(6, id_matriz);
+                preparedStatement.setInt(7, contadorTouch);
+                preparedStatement.setInt(8, contadorInstruccionesActividad);
 
                 preparedStatement.execute();//se ejecuta la query
                 preparedStatement.close();//cierro el statement con la query

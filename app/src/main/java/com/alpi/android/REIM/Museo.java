@@ -29,6 +29,7 @@ public class Museo extends Activity {
     boolean isSuccess = false;
     Fecha fecha = new Fecha();
     String fechaTerminoSesion = fecha.fechaActual;
+    int contadorClickMapa, contadorClickInstrucciones;
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -65,12 +66,20 @@ public class Museo extends Activity {
         ticketsMuseo = (ImageView) findViewById(R.id.tickets);
         ticketsMuseo.setImageResource(R.drawable.tickets_0);
 
+        Bundle extras = getIntent().getExtras();
+        contadorClickMapa = extras.getInt("CONTADOR_CLICK_MAPA");
+        contadorClickInstrucciones = extras.getInt("CONTADOR_CLICK_INSTRUCCIONES");
+        System.out.println("Contador instrucciones: "+ contadorClickInstrucciones);
+
         terminar = (Button) findViewById(R.id.terminar);
         terminar.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
+                final int contadorClickInstruccionesOut = 0;
+                final int contadorClickMapaOut = 0;
                 Intent intent = new Intent(Museo.this, MapaOeste.class);
+                intent.putExtra("CONTADOR_CLICK_MAPA", contadorClickMapaOut);
+                intent.putExtra("CONTADOR_CLICK_INSTRUCCIONES", contadorClickInstruccionesOut);
                 intent.putExtra("VALOR_GAMIFICACION", valorGamificacionNuevo);
                 startActivity(intent);
                 finish();
@@ -107,7 +116,7 @@ public class Museo extends Activity {
             try {
 
                 Class.forName("com.mysql.jdbc.Driver");
-                String url = "jdbc:mysql://mysql.ulearnet.com:3306/ulearnet_des";//"jdbc:mysql:///10.0.3.2:3306/dbname"
+                String url = "jdbc:mysql://mysql.ulearnet.com:3306/ulearnet_des";
                 Connection connection = DriverManager.getConnection(url, "ulearnet_des", "ulearnet_des@");
 
                 String getSesion = "SELECT id_sesion FROM ASIGNA_REALIZAR_SESION ORDER BY id_sesion DESC LIMIT 1";
@@ -139,12 +148,17 @@ public class Museo extends Activity {
                     id_pertenece_tabla = resultSet2.getInt("id");
                 }
                 System.out.println("id_pertenece_tabla=="+id_pertenece_tabla);
+                System.out.println("contador clicks mapa: "+contadorClickMapa);
+                System.out.println("contador instrucciones: "+contadorClickInstrucciones);
 
                 PreparedStatement setSesion = connection.prepareStatement("INSERT INTO ASIGNA_REALIZAR_SESION" +
-                        " (REIM_id_reim, PERTENECE_id, datetime_inicio_sesion, datetime_termino_sesion) VALUES (3, ?, ?, ?)");
+                        " (REIM_id_reim, PERTENECE_id, datetime_inicio_sesion, datetime_termino_sesion, contador_click_mapa, contador_click_instrucciones) " +
+                        "VALUES (3, ?, ?, ?, ?, ?)");
                 setSesion.setInt(1, id_pertenece_tabla);
                 setSesion.setTimestamp(2, Timestamp.valueOf(MapaOeste.fechaInicioSesion));
                 setSesion.setTimestamp(3, Timestamp.valueOf(fechaTerminoSesion));
+                setSesion.setInt(4, contadorClickMapa);
+                setSesion.setInt(5, contadorClickInstrucciones);
                 setSesion.execute();
                 setSesion.close();
                 isSuccess = true;

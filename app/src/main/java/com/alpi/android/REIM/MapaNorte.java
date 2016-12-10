@@ -18,6 +18,7 @@ public class MapaNorte extends Activity {
     Button casaActividad001;
     Button instruccionMiraCasa;
     ImageView ticketsMuseo;
+    int contadorClickInstrucciones;
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -46,7 +47,11 @@ public class MapaNorte extends Activity {
         setContentView(R.layout.vista_mapa_norte);
 
         Bundle extras = getIntent().getExtras();
+        final int contadorClickMapaIn = extras.getInt("CONTADOR_CLICK_MAPA");
+        final int contadorClickInstruccionesIn = extras.getInt("CONTADOR_CLICK_INSTRUCCIONES");
         final int valorGamificacion = extras.getInt("VALOR_GAMIFICACION");
+        final int contadorClickMapaOut = contadorClickMapaIn + 1;
+
         ticketsMuseo = (ImageView) findViewById(R.id.tickets);
 
         if(valorGamificacion == 0) {
@@ -57,11 +62,24 @@ public class MapaNorte extends Activity {
             ticketsMuseo.setImageResource(R.drawable.tickets_2);
         }
 
+        instruccionMiraCasa = (Button) findViewById(R.id.botonInstruccion);
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.mira_casa);
+        instruccionMiraCasa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mediaPlayer.start();
+                contadorClickInstrucciones += 1;
+            }
+        });
+
         irAlOeste = (Button) findViewById(R.id.botonIrAlEste);
         irAlOeste.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final int contadorClickInstruccionesOut = contadorClickInstruccionesIn + contadorClickInstrucciones;
                 Intent intent = new Intent(MapaNorte.this, MapaEste.class);
+                intent.putExtra("CONTADOR_CLICK_MAPA", contadorClickMapaOut);
+                intent.putExtra("CONTADOR_CLICK_INSTRUCCIONES", contadorClickInstruccionesOut);
                 intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
                 startActivity(intent);
             }
@@ -71,7 +89,10 @@ public class MapaNorte extends Activity {
         irAlEste.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final int contadorClickInstruccionesOut = contadorClickInstruccionesIn + contadorClickInstrucciones;
                 Intent intent = new Intent(MapaNorte.this, MapaOeste.class);
+                intent.putExtra("CONTADOR_CLICK_MAPA", contadorClickMapaOut);
+                intent.putExtra("CONTADOR_CLICK_INSTRUCCIONES", contadorClickInstruccionesOut);
                 intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
                 startActivity(intent);
             }
@@ -81,7 +102,10 @@ public class MapaNorte extends Activity {
         irAlCentro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final int contadorClickInstruccionesOut = contadorClickInstruccionesIn + contadorClickInstrucciones;
                 Intent intent = new Intent(MapaNorte.this, MapaCentro.class);
+                intent.putExtra("CONTADOR_CLICK_MAPA", contadorClickMapaOut);
+                intent.putExtra("CONTADOR_CLICK_INSTRUCCIONES", contadorClickInstruccionesOut);
                 intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
                 startActivity(intent);
             }
@@ -91,18 +115,12 @@ public class MapaNorte extends Activity {
         casaActividad001.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final int contadorClickInstruccionesOut = contadorClickInstruccionesIn + contadorClickInstrucciones;
                 Intent intent = new Intent(MapaNorte.this, Actividad001.class);
+                intent.putExtra("CONTADOR_CLICK_MAPA", contadorClickMapaOut);
+                intent.putExtra("CONTADOR_CLICK_INSTRUCCIONES", contadorClickInstruccionesOut);
                 intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
                 startActivity(intent);
-            }
-        });
-
-        instruccionMiraCasa = (Button) findViewById(R.id.botonInstruccion);
-        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.mira_casa);
-        instruccionMiraCasa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mediaPlayer.start();
             }
         });
 

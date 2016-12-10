@@ -19,6 +19,7 @@ public class MapaOeste extends Activity {
     ImageView ticketsMuseo;
     static String fechaInicioSesion;
     Fecha fecha = new Fecha();
+    int contadorClickInstrucciones;
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -31,7 +32,8 @@ public class MapaOeste extends Activity {
                             | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);}
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
     }
 
     @Override
@@ -47,11 +49,15 @@ public class MapaOeste extends Activity {
         setContentView(R.layout.vista_mapa_oeste);
 
         Bundle extras = getIntent().getExtras();
+        final int contadorClickMapaIn = extras.getInt("CONTADOR_CLICK_MAPA");
+        final int contadorClickInstruccionesIn = extras.getInt("CONTADOR_CLICK_INSTRUCCIONES");
         final int valorGamificacion = extras.getInt("VALOR_GAMIFICACION");
+        final int contadorClickMapaOut = contadorClickMapaIn + 1;
+
         fechaInicioSesion = fecha.fechaActual;
         ticketsMuseo = (ImageView) findViewById(R.id.tickets);
 
-        if(valorGamificacion == 0) {
+        if (valorGamificacion == 0) {
             ticketsMuseo.setImageResource(R.drawable.tickets_0);
         } else if (valorGamificacion == 1) {
             ticketsMuseo.setImageResource(R.drawable.tickets_1);
@@ -64,7 +70,8 @@ public class MapaOeste extends Activity {
         instruccionDebemosLLegarMuseo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    mediaPlayer.start();
+                mediaPlayer.start();
+                contadorClickInstrucciones += 1;
             }
         });
 
@@ -72,7 +79,10 @@ public class MapaOeste extends Activity {
         irAlNorte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final int contadorClickInstruccionesOut = contadorClickInstruccionesIn + contadorClickInstrucciones;
                 Intent intent = new Intent(MapaOeste.this, MapaNorte.class);
+                intent.putExtra("CONTADOR_CLICK_MAPA", contadorClickMapaOut);
+                intent.putExtra("CONTADOR_CLICK_INSTRUCCIONES", contadorClickInstruccionesOut);
                 intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
                 startActivity(intent);
             }
@@ -82,7 +92,10 @@ public class MapaOeste extends Activity {
         irAlCentro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final int contadorClickInstruccionesOut = contadorClickInstruccionesIn + contadorClickInstrucciones;
                 Intent intent = new Intent(MapaOeste.this, MapaCentro.class);
+                intent.putExtra("CONTADOR_CLICK_MAPA", contadorClickMapaOut);
+                intent.putExtra("CONTADOR_CLICK_INSTRUCCIONES", contadorClickInstruccionesOut);
                 intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
                 startActivity(intent);
             }
@@ -92,7 +105,10 @@ public class MapaOeste extends Activity {
         irAlSur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final int contadorClickInstruccionesOut = contadorClickInstruccionesIn + contadorClickInstrucciones;
                 Intent intent = new Intent(MapaOeste.this, MapaSur.class);
+                intent.putExtra("CONTADOR_CLICK_MAPA", contadorClickMapaOut);
+                intent.putExtra("CONTADOR_CLICK_INSTRUCCIONES", contadorClickInstruccionesOut);
                 intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
                 startActivity(intent);
             }
@@ -118,6 +134,5 @@ public class MapaOeste extends Activity {
             }
 
         });
-
     }
 }
