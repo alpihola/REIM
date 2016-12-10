@@ -2,12 +2,14 @@ package com.alpi.android.REIM;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -16,15 +18,27 @@ import android.widget.Button;
 import com.alpi.android.REIM.helper.OnStartDragListener;
 import com.alpi.android.REIM.helper.SimpleItemTouchHelperCallback;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+
+import static com.alpi.android.REIM.Museo.id_sesion;
 
 public class Actividad002 extends AppCompatActivity implements OnStartDragListener {
 
     private ItemTouchHelper mItemTouchHelper;
     Button instruccionActividad002;
-    Button mostrarResultado;
+    Button finalizarActividad;
+    static String fechaInicioActividad, fechaTerminoActividad, fechaDismiss, matrizInicial, matrizFinal;
+    Fecha datetimeInicioActividad = new Fecha();
+    private int correcto = 0;
+    int id_matriz;
 
     private final String nombreElementoBomberos[] = {
             "Botas",
@@ -124,6 +138,7 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
         Bundle extras = getIntent().getExtras();
         final int valorGamificacionPrevio = extras.getInt("VALOR_GAMIFICACION");
         final int valorGamificacionFinal = valorGamificacionPrevio + 1;
+        fechaInicioActividad = datetimeInicioActividad.fechaActual;
 
         ArrayList<ElementoBomberos> elementosBomberos = new ArrayList<>();
         for (int i = 0; i < nombreElementoBomberos.length; i++) {
@@ -170,18 +185,25 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
         });
 
 
-        mostrarResultado = (Button) findViewById(R.id.botonMostrarResultado);
-        mostrarResultado.setOnClickListener(new View.OnClickListener() {
+        finalizarActividad = (Button) findViewById(R.id.botonMostrarResultado);
+        finalizarActividad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                adapter.getResult();
-
+                Fecha datetimeTerminoActividad = new Fecha();
+                fechaTerminoActividad = datetimeTerminoActividad.fechaActual;
+                matrizFinal = TextUtils.join(", ", adapter.getMatrizFinal());
+                if(adapter.getCorrespondeMatrizFinal()/adapter.getMatrizFinal().length > 0.5) {
+                    correcto = 1;
+                } else {
+                    correcto = 0;
+                }
+                consulta finalizarActividad = new consulta();
+                finalizarActividad.execute();
                 new Handler().postDelayed(new Runnable() {
 
                     @Override
                     public void run() {
                         Intent intent = new Intent(Actividad002.this, MapaSur.class);
-                        intent.putExtra("ELEMENTOS_BOMBEROS_FINALES", adapter.getResult());
                         intent.putExtra("VALOR_GAMIFICACION", valorGamificacionFinal);
                         startActivity(intent);
                         finish();
@@ -192,7 +214,7 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
 
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.animacion_boton_instrucciones);
         instruccionActividad002.setAnimation(animation);
-        mostrarResultado.setAnimation(animation);
+        finalizarActividad.setAnimation(animation);
 
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -203,7 +225,7 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
             @Override
             public void onAnimationEnd(Animation animation) {
                 instruccionActividad002.startAnimation(animation);
-                mostrarResultado.startAnimation(animation);
+                finalizarActividad.startAnimation(animation);
             }
 
             @Override
@@ -213,11 +235,75 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
 
         });
 
+        matrizInicial = TextUtils.join(", ", adapter.getMatrizInicial());
+
     }
 
     @Override
     public void startSwipe(RecyclerView.ViewHolder viewHolder) {
         mItemTouchHelper.startSwipe(viewHolder);
+        Fecha datetimeDismiss = new Fecha();
+        fechaDismiss = datetimeDismiss.fechaActual;
+    }
+
+    public class consulta extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            try {
+
+                //conexion
+                Class.forName("com.mysql.jdbc.Driver");
+                String url = "jdbc:mysql://mysql.ulearnet.com:3306/ulearnet_des";//"jdbc:mysql:///10.0.3.2:3306/dbname"
+                Connection connection = DriverManager.getConnection(url, "ulearnet_des", "ulearnet_des@");
+
+                String getSesion = "SELECT id_sesion FROM ASIGNA_REALIZAR_SESION ORDER BY id_sesion DESC LIMIT 1";
+                Statement statement = connection.prepareStatement(getSesion);
+                ResultSet resultSet = statement.executeQuery(getSesion);
+
+                while(resultSet.next()) {
+                    id_sesion = resultSet.getInt("id_sesion");
+                    System.out.println(id_sesion);
+                }
+
+                String setMatrizElemento = "INSERT INTO MATRIZ_ELEMENTO (matriz_inicial, matriz_resultante) VALUES (?, ?)";
+                PreparedStatement statement2 = connection.prepareStatement(setMatrizElemento);
+                statement2.setString(1, matrizInicial);
+                statement2.setString(2, matrizFinal);
+                statement2.execute();
+                statement2.close();
+
+                String getMatrizId = "SELECT id_matriz FROM MATRIZ_ELEMENTO ORDER BY id_matriz DESC LIMIT 1";
+                Statement statement1 = connection.prepareStatement(getMatrizId);
+                ResultSet resultSet1 = statement1.executeQuery(getMatrizId);
+
+                while(resultSet1.next()) {
+                    id_matriz = resultSet1.getInt("id_matriz");
+                    System.out.println(id_matriz);
+                }
+
+                //declaro el statement con la query para despues ejecutarla
+                PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ALUMNO_REALIZA_ACTIVIDAD " +
+                        "(datetime_inicio_actividad, datetime_touch, datetime_termino_actividad, correcto, ACTIVIDAD_id_actividad, ASIGNA" +
+                        "_REALIZAR_SESION_id_sesion, MATRIZ_ELEMENTO_id_matriz) VALUES (?, ?, ?, ?, 5, ?, ?)");
+                preparedStatement.setString(1, fechaInicioActividad);
+                preparedStatement.setString(2, fechaDismiss);
+                preparedStatement.setString(3, fechaTerminoActividad);
+                preparedStatement.setInt(4, correcto);
+                preparedStatement.setInt(5, id_sesion);
+                preparedStatement.setInt(6, id_matriz);
+
+                preparedStatement.execute();//se ejecuta la query
+                preparedStatement.close();//cierro el statement con la query
+                connection.close();//cierro la conexion
+
+            } catch (ClassNotFoundException | SQLException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
     }
 
 }

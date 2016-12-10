@@ -30,6 +30,14 @@ implements ItemTouchHelperAdapter {
     private Context context;
     private final OnStartDragListener mDragStartListener;
 
+    public String[] getMatrizInicial() {
+        String [] matrizInicial = new String[elementosBomberos.size()];
+        for(int i = 0; i < elementosBomberos.size(); i++) {
+            matrizInicial[i] = elementosBomberos.get(i).getNombreElementoBomberos();
+        }
+        return matrizInicial;
+    }
+
     public ElementoBomberosAdapter(Context context, ArrayList<ElementoBomberos> elementosBomberos, OnStartDragListener dragStartListener) {
         this.context = context;
         this.elementosBomberos = elementosBomberos;
@@ -109,18 +117,28 @@ implements ItemTouchHelperAdapter {
 
     }
 
-    public String[] getResult() {
+    public String[] getMatrizFinal() {
         if(elementosBomberos.size() == 0) {
-            String[] elementosBomberosFinales = new String[1];
-            elementosBomberosFinales[0] = "Vacío";
-            return elementosBomberosFinales;
+            String[] matrizFinal = new String[1];
+            matrizFinal[0] = "Vacío";
+            return matrizFinal;
         } else {
-            String[] elementosBomberosFinales = new String[elementosBomberos.size()];
-            for (int i = 0; i < elementosBomberosFinales.length; i++) {
-                elementosBomberosFinales[i] = elementosBomberos.get(i).getNombreElementoBomberos();
+            String[] matrizFinal = new String[elementosBomberos.size()];
+            for (int i = 0; i < matrizFinal.length; i++) {
+                matrizFinal[i] = elementosBomberos.get(i).getNombreElementoBomberos();
             }
-            return elementosBomberosFinales;
+            return matrizFinal;
         }
+    }
+
+    public int getCorrespondeMatrizFinal() {
+        int correspondeElementoBomberos = 0;
+        for (int i=0; i < elementosBomberos.size(); i++) {
+            if(elementosBomberos.get(i).getCorrespondeElementoBomberos()) {
+                correspondeElementoBomberos = correspondeElementoBomberos + 1;
+            }
+        }
+        return correspondeElementoBomberos;
     }
 
 }

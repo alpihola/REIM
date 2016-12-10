@@ -105,13 +105,11 @@ public class AlimentoAdapter extends RecyclerView.Adapter<AlimentoAdapter.ViewHo
             imagen = (ImageView) view.findViewById(R.id.imagen);
         }
 
-
         @Override
         public void onItemSelected() {
             Animation animation = AnimationUtils.loadAnimation(context, R.anim.animacion_items);
             itemView.setAnimation(animation);
         }
-
 
         @Override
         public void onItemClear() {
@@ -142,4 +140,5 @@ public class AlimentoAdapter extends RecyclerView.Adapter<AlimentoAdapter.ViewHo
         }
         return correspondeAlimentos;
     }
+
 }
