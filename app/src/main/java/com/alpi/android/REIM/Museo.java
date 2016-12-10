@@ -10,7 +10,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,6 +27,8 @@ public class Museo extends Activity {
     final int valorGamificacionNuevo = 0;
     static int id_sesion, id_pertenece, id_pertenece_tabla;
     boolean isSuccess = false;
+    Fecha fecha = new Fecha();
+    String fechaTerminoSesion = fecha.fechaActual;
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -58,15 +59,21 @@ public class Museo extends Activity {
         final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.felicitaciones);
         mediaPlayer.start();
 
+        consulta finalizarSesion = new consulta();
+        finalizarSesion.execute();
+
         ticketsMuseo = (ImageView) findViewById(R.id.tickets);
         ticketsMuseo.setImageResource(R.drawable.tickets_0);
 
         terminar = (Button) findViewById(R.id.terminar);
         terminar.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                consulta finalizarSesion = new consulta();
-                finalizarSesion.execute();
+                Intent intent = new Intent(Museo.this, MapaOeste.class);
+                intent.putExtra("VALOR_GAMIFICACION", valorGamificacionNuevo);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -96,9 +103,6 @@ public class Museo extends Activity {
 
         @Override
         protected Void doInBackground(Void... args) {
-
-            Fecha fecha = new Fecha();
-            String fechaTerminoSesion = fecha.fechaActual;
 
             try {
 
@@ -152,17 +156,5 @@ public class Museo extends Activity {
             return null;
         }
 
-        @Override
-        protected void onPostExecute(Void args) {
-            if (isSuccess) {
-                Intent intent = new Intent(Museo.this, MapaOeste.class);
-                intent.putExtra("VALOR_GAMIFICACION", valorGamificacionNuevo);
-                startActivity(intent);
-                finish();
-            }
-
-        }
-
     }
-
 }
