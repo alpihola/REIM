@@ -34,7 +34,7 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
 
     private ItemTouchHelper mItemTouchHelper;
     Button instruccionActividad002, finalizarActividad;
-    static String fechaInicioActividad, fechaTerminoActividad, fechaDismiss, matrizInicial, matrizFinal;
+    static String fechaInicioActividad, fechaTerminoActividad, fechaDismiss, matrizInicial, matrizFinal, correspondeMatrizInicial, correspondeMatrizFinal;
     Fecha datetimeInicioActividad = new Fecha();
     private int correcto = 0;
     int id_matriz, contadorTouch, contadorInstruccionesActividad;
@@ -195,7 +195,8 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
                 Fecha datetimeTerminoActividad = new Fecha();
                 fechaTerminoActividad = datetimeTerminoActividad.fechaActual;
                 matrizFinal = TextUtils.join(", ", adapter.getMatrizFinal());
-                if(adapter.getCorrespondeMatrizFinal()/adapter.getMatrizFinal().length > 0.5) {
+                correspondeMatrizFinal = TextUtils.join(", ", adapter.getCorrespondeMatrizFinal());
+                if(adapter.getCorrectoFinal()/adapter.getMatrizFinal().length > 0.5) {
                     correcto = 1;
                 } else {
                     correcto = 0;
@@ -242,6 +243,7 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
         });
 
         matrizInicial = TextUtils.join(", ", adapter.getMatrizInicial());
+        correspondeMatrizInicial = TextUtils.join(", ", adapter.getCorrespondeMatrizInicial());
 
     }
 
@@ -274,10 +276,13 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
                     System.out.println(id_sesion);
                 }
 
-                String setMatrizElemento = "INSERT INTO MATRIZ_ELEMENTO (matriz_inicial, matriz_resultante) VALUES (?, ?)";
+                String setMatrizElemento = "INSERT INTO MATRIZ_ELEMENTO (matriz_inicial, matriz_resultante, matriz_inicial_corresponde, " +
+                        "matriz_final_corresponde) VALUES (?, ?, ?, ?)";
                 PreparedStatement statement2 = connection.prepareStatement(setMatrizElemento);
                 statement2.setString(1, matrizInicial);
                 statement2.setString(2, matrizFinal);
+                statement2.setString(3, correspondeMatrizInicial);
+                statement2.setString(4, correspondeMatrizFinal);
                 statement2.execute();
                 statement2.close();
 

@@ -165,7 +165,9 @@ public class SeleccionarAlumno extends AppCompatActivity {
 
                 System.out.println("id_curso===" + id_curso);
 
-                String query2 = "select u.nombres, u.apellido_paterno, u.apellido_materno from sf_guard_user u, PERTENECE_reim p, curso c where c.id='" + id_curso + "' and p.CURSO_id_curso='" + id_curso + "' and u.id=p.sf_guard_user_id and u.alumno !=0";
+                String query2 = "select u.nombres, u.apellido_paterno, u.apellido_materno " +
+                        "from sf_guard_user u, PERTENECE_reim p, curso c " +
+                        "where c.id='" + id_curso + "' and p.CURSO_id_curso= c.id and u.id=p.sf_guard_user_id and u.alumno !=0";
                 Statement statement2 = connection.prepareStatement(query2);
                 ResultSet resultSet2 = statement2.executeQuery(query2);
 

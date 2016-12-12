@@ -38,6 +38,14 @@ implements ItemTouchHelperAdapter {
         return matrizInicial;
     }
 
+    public Boolean[] getCorrespondeMatrizInicial() {
+        Boolean[] matrizInicialCorresponde = new Boolean[elementosBomberos.size()];
+        for(int i = 0; i < elementosBomberos.size(); i++) {
+            matrizInicialCorresponde[i] = elementosBomberos.get(i).getCorrespondeElementoBomberos();
+        }
+        return matrizInicialCorresponde;
+    }
+
     public ElementoBomberosAdapter(Context context, ArrayList<ElementoBomberos> elementosBomberos, OnStartDragListener dragStartListener) {
         this.context = context;
         this.elementosBomberos = elementosBomberos;
@@ -131,14 +139,22 @@ implements ItemTouchHelperAdapter {
         }
     }
 
-    public int getCorrespondeMatrizFinal() {
-        int correspondeElementoBomberos = 0;
+    public int getCorrectoFinal() {
+        int correcto = 0;
         for (int i=0; i < elementosBomberos.size(); i++) {
             if(elementosBomberos.get(i).getCorrespondeElementoBomberos()) {
-                correspondeElementoBomberos = correspondeElementoBomberos + 1;
+                correcto = correcto + 1;
             }
         }
-        return correspondeElementoBomberos;
+        return correcto;
+    }
+
+    public Boolean[] getCorrespondeMatrizFinal() {
+        Boolean[] matrizFinalCorresponde = new Boolean[elementosBomberos.size()];
+        for(int i = 0; i < elementosBomberos.size(); i++) {
+            matrizFinalCorresponde[i] = elementosBomberos.get(i).getCorrespondeElementoBomberos();
+        }
+        return matrizFinalCorresponde;
     }
 
 }

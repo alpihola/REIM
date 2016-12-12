@@ -38,6 +38,14 @@ public class AlimentoAdapter extends RecyclerView.Adapter<AlimentoAdapter.ViewHo
         return matrizInicial;
     }
 
+    public Boolean[] getCorrespondeMatrizInicial() {
+        Boolean[] matrizInicialCorresponde = new Boolean[alimentos.size()];
+        for(int i = 0; i < alimentos.size(); i++) {
+            matrizInicialCorresponde[i] = alimentos.get(i).getCorrespondeAlimento();
+        }
+        return matrizInicialCorresponde;
+    }
+
         AlimentoAdapter(Context context, ArrayList<Alimento> alimentos, OnStartDragListener dragStartListener) {
         this.context = context;
         this.alimentos = alimentos;
@@ -131,14 +139,22 @@ public class AlimentoAdapter extends RecyclerView.Adapter<AlimentoAdapter.ViewHo
         }
     }
 
-    public int getCorrespondeMatrizFinal() {
-        int correspondeAlimentos = 0;
+    public int getCorrectoFinal() {
+        int correcto = 0;
         for (int i=0; i < alimentos.size(); i++) {
             if(alimentos.get(i).getCorrespondeAlimento()) {
-                correspondeAlimentos = correspondeAlimentos + 1;
+                correcto = correcto + 1;
             }
         }
-        return correspondeAlimentos;
+        return correcto;
+    }
+
+    public Boolean[] getCorrespondeMatrizFinal() {
+        Boolean[] matrizFinalCorresponde = new Boolean[alimentos.size()];
+        for(int i = 0; i < alimentos.size(); i++) {
+            matrizFinalCorresponde[i] = alimentos.get(i).getCorrespondeAlimento();
+        }
+        return matrizFinalCorresponde;
     }
 
 }
