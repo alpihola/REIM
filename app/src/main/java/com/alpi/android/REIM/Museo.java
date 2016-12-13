@@ -151,14 +151,12 @@ public class Museo extends Activity {
                 System.out.println("contador clicks mapa: "+contadorClickMapa);
                 System.out.println("contador instrucciones: "+contadorClickInstrucciones);
 
-                PreparedStatement setSesion = connection.prepareStatement("INSERT INTO ASIGNA_REALIZAR_SESION" +
-                        " (REIM_id_reim, PERTENECE_id, datetime_inicio_sesion, datetime_termino_sesion, contador_click_mapa, contador_click_instrucciones) " +
-                        "VALUES (3, ?, ?, ?, ?, ?)");
-                setSesion.setInt(1, id_pertenece_tabla);
-                setSesion.setTimestamp(2, Timestamp.valueOf(MapaOeste.fechaInicioSesion));
-                setSesion.setTimestamp(3, Timestamp.valueOf(fechaTerminoSesion));
-                setSesion.setInt(4, contadorClickMapa);
-                setSesion.setInt(5, contadorClickInstrucciones);
+                PreparedStatement setSesion = connection.prepareStatement("UPDATE ASIGNA_REALIZAR_SESION" +
+                        " SET datetime_termino_sesion = ?, contador_click_mapa = ?, contador_click_instrucciones = ? " +
+                        "WHERE id_sesion = "+id_sesion);
+                setSesion.setTimestamp(1, Timestamp.valueOf(fechaTerminoSesion));
+                setSesion.setInt(2, contadorClickMapa);
+                setSesion.setInt(3, contadorClickInstrucciones);
                 setSesion.execute();
                 setSesion.close();
                 isSuccess = true;
@@ -169,6 +167,6 @@ public class Museo extends Activity {
             }
             return null;
         }
-
     }
+
 }
