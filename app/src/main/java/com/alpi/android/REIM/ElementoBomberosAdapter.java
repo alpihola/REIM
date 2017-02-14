@@ -12,11 +12,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.alpi.android.REIM.helper.ItemTouchHelperAdapter;
 import com.alpi.android.REIM.helper.ItemTouchHelperViewHolder;
-import com.alpi.android.REIM.helper.OnStartDragListener;
+import com.alpi.android.REIM.helper.OnStartSwipeListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ implements ItemTouchHelperAdapter {
 
     private ArrayList<ElementoBomberos> elementosBomberos;
     private Context context;
-    private final OnStartDragListener mDragStartListener;
+    private final OnStartSwipeListener mDragStartListener;
 
     public String[] getMatrizInicial() {
         String [] matrizInicial = new String[elementosBomberos.size()];
@@ -46,7 +46,7 @@ implements ItemTouchHelperAdapter {
         return matrizInicialCorresponde;
     }
 
-    public ElementoBomberosAdapter(Context context, ArrayList<ElementoBomberos> elementosBomberos, OnStartDragListener dragStartListener) {
+    public ElementoBomberosAdapter(Context context, ArrayList<ElementoBomberos> elementosBomberos, OnStartSwipeListener dragStartListener) {
         this.context = context;
         this.elementosBomberos = elementosBomberos;
         mDragStartListener = dragStartListener;
@@ -87,13 +87,6 @@ implements ItemTouchHelperAdapter {
         }
         elementosBomberos.remove(position);
         notifyItemRemoved(position);
-    }
-
-    @Override
-    public boolean onItemMove(int fromPosition, int toPosition) {
-        Collections.swap(elementosBomberos, fromPosition, toPosition);
-        notifyItemMoved(fromPosition, toPosition);
-        return true;
     }
 
     @Override

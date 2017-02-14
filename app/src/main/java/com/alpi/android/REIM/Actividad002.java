@@ -2,7 +2,6 @@ package com.alpi.android.REIM;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -15,29 +14,22 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
-import com.alpi.android.REIM.helper.OnStartDragListener;
+import com.alpi.android.REIM.helper.OnStartSwipeListener;
 import com.alpi.android.REIM.helper.SimpleItemTouchHelperCallback;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-import static com.alpi.android.REIM.Museo.id_sesion;
 
-public class Actividad002 extends AppCompatActivity implements OnStartDragListener {
+public class Actividad002 extends AppCompatActivity implements OnStartSwipeListener {
 
     private ItemTouchHelper mItemTouchHelper;
     Button instruccionActividad002, finalizarActividad;
     static String fechaInicioActividad, fechaTerminoActividad, fechaDismiss, matrizInicial, matrizFinal, correspondeMatrizInicial, correspondeMatrizFinal;
     Fecha datetimeInicioActividad = new Fecha();
     private int correcto = 0;
-    int id_matriz, contadorTouch, contadorInstruccionesActividad;
+    int contadorTouch, contadorInstruccionesActividad;
     int contadorClickInstrucciones;
 
     private final String nombreElementoBomberos[] = {
@@ -201,8 +193,7 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
                 } else {
                     correcto = 0;
                 }
-                consulta finalizarActividad = new consulta();
-                finalizarActividad.execute();
+
                 new Handler().postDelayed(new Runnable() {
 
                     @Override
@@ -253,72 +244,6 @@ public class Actividad002 extends AppCompatActivity implements OnStartDragListen
         Fecha datetimeDismiss = new Fecha();
         fechaDismiss = datetimeDismiss.fechaActual;
         contadorTouch += 1;
-    }
-
-    public class consulta extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... params) {
-
-            try {
-
-                //conexion
-                Class.forName("com.mysql.jdbc.Driver");
-                String url = "jdbc:mysql://mysql.ulearnet.com:3306/ulearnet_des";//"jdbc:mysql:///10.0.3.2:3306/dbname"
-                Connection connection = DriverManager.getConnection(url, "ulearnet_des", "ulearnet_des@");
-
-                String getSesion = "SELECT id_sesion FROM ASIGNA_REALIZAR_SESION ORDER BY id_sesion DESC LIMIT 1";
-                Statement statement = connection.prepareStatement(getSesion);
-                ResultSet resultSet = statement.executeQuery(getSesion);
-
-                while(resultSet.next()) {
-                    id_sesion = resultSet.getInt("id_sesion");
-                    System.out.println(id_sesion);
-                }
-
-                String setMatrizElemento = "INSERT INTO MATRIZ_ELEMENTO (matriz_inicial, matriz_resultante, matriz_inicial_corresponde, " +
-                        "matriz_final_corresponde) VALUES (?, ?, ?, ?)";
-                PreparedStatement statement2 = connection.prepareStatement(setMatrizElemento);
-                statement2.setString(1, matrizInicial);
-                statement2.setString(2, matrizFinal);
-                statement2.setString(3, correspondeMatrizInicial);
-                statement2.setString(4, correspondeMatrizFinal);
-                statement2.execute();
-                statement2.close();
-
-                String getMatrizId = "SELECT id_matriz FROM MATRIZ_ELEMENTO ORDER BY id_matriz DESC LIMIT 1";
-                Statement statement1 = connection.prepareStatement(getMatrizId);
-                ResultSet resultSet1 = statement1.executeQuery(getMatrizId);
-
-                while(resultSet1.next()) {
-                    id_matriz = resultSet1.getInt("id_matriz");
-                    System.out.println(id_matriz);
-                }
-
-                //declaro el statement con la query para despues ejecutarla
-                PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ALUMNO_REALIZA_ACTIVIDAD " +
-                        "(datetime_inicio_actividad, datetime_touch, datetime_termino_actividad, correcto, ACTIVIDAD_id_actividad, ASIGNA" +
-                        "_REALIZAR_SESION_id_sesion, MATRIZ_ELEMENTO_id_matriz, contador_click_totales, contador_click_instrucciones)" +
-                        " VALUES (?, ?, ?, ?, 5, ?, ?, ?, ?)");
-                preparedStatement.setString(1, fechaInicioActividad);
-                preparedStatement.setString(2, fechaDismiss);
-                preparedStatement.setString(3, fechaTerminoActividad);
-                preparedStatement.setInt(4, correcto);
-                preparedStatement.setInt(5, id_sesion);
-                preparedStatement.setInt(6, id_matriz);
-                preparedStatement.setInt(7, contadorTouch);
-                preparedStatement.setInt(8, contadorInstruccionesActividad);
-
-                preparedStatement.execute();//se ejecuta la query
-                preparedStatement.close();//cierro el statement con la query
-                connection.close();//cierro la conexion
-
-            } catch (ClassNotFoundException | SQLException e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
     }
 
 }

@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.alpi.android.REIM.helper.ItemTouchHelperAdapter;
 import com.alpi.android.REIM.helper.ItemTouchHelperViewHolder;
-import com.alpi.android.REIM.helper.OnStartDragListener;
+import com.alpi.android.REIM.helper.OnStartSwipeListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class AlimentoAdapter extends RecyclerView.Adapter<AlimentoAdapter.ViewHo
 
     private ArrayList<Alimento> alimentos;
     private Context context;
-    private final OnStartDragListener mDragStartListener2;
+    private final OnStartSwipeListener mDragStartListener2;
 
     public String[] getMatrizInicial() {
         String [] matrizInicial = new String[alimentos.size()];
@@ -46,7 +46,7 @@ public class AlimentoAdapter extends RecyclerView.Adapter<AlimentoAdapter.ViewHo
         return matrizInicialCorresponde;
     }
 
-        AlimentoAdapter(Context context, ArrayList<Alimento> alimentos, OnStartDragListener dragStartListener) {
+        AlimentoAdapter(Context context, ArrayList<Alimento> alimentos, OnStartSwipeListener dragStartListener) {
         this.context = context;
         this.alimentos = alimentos;
         mDragStartListener2 = dragStartListener;
@@ -88,13 +88,6 @@ public class AlimentoAdapter extends RecyclerView.Adapter<AlimentoAdapter.ViewHo
         }
         alimentos.remove(position);
         notifyItemRemoved(position);
-    }
-
-    @Override
-    public boolean onItemMove(int fromPosition, int toPosition) {
-        Collections.swap(alimentos, fromPosition, toPosition);
-        notifyItemMoved(fromPosition, toPosition);
-        return true;
     }
 
     @Override

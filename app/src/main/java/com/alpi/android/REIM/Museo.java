@@ -11,24 +11,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
-
 
 public class Museo extends Activity {
 
     Button terminar;
     ImageView ticketsMuseo;
     final int valorGamificacionNuevo = 0;
-    static int id_sesion, id_pertenece, id_pertenece_tabla;
-    boolean isSuccess = false;
-    Fecha fecha = new Fecha();
-    String fechaTerminoSesion = fecha.fechaActual;
     int contadorClickMapa, contadorClickInstrucciones;
 
     @Override
@@ -60,9 +48,6 @@ public class Museo extends Activity {
         final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.felicitaciones);
         mediaPlayer.start();
 
-        consulta finalizarSesion = new consulta();
-        finalizarSesion.execute();
-
         ticketsMuseo = (ImageView) findViewById(R.id.tickets);
         ticketsMuseo.setImageResource(R.drawable.tickets_0);
 
@@ -70,6 +55,7 @@ public class Museo extends Activity {
         contadorClickMapa = extras.getInt("CONTADOR_CLICK_MAPA");
         contadorClickInstrucciones = extras.getInt("CONTADOR_CLICK_INSTRUCCIONES");
         System.out.println("Contador instrucciones: "+ contadorClickInstrucciones);
+        System.out.println("Contador click mapa: "+ contadorClickMapa);
 
         terminar = (Button) findViewById(R.id.terminar);
         terminar.setOnClickListener(new View.OnClickListener() {
@@ -106,67 +92,6 @@ public class Museo extends Activity {
             }
 
         });
-    }
-
-    public class consulta extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... args) {
-
-            try {
-
-                Class.forName("com.mysql.jdbc.Driver");
-                String url = "jdbc:mysql://mysql.ulearnet.com:3306/ulearnet_des";
-                Connection connection = DriverManager.getConnection(url, "ulearnet_des", "ulearnet_des@");
-
-                String getSesion = "SELECT id_sesion FROM ASIGNA_REALIZAR_SESION ORDER BY id_sesion DESC LIMIT 1";
-                Statement statement = connection.prepareStatement(getSesion);
-                ResultSet resultSet = statement.executeQuery(getSesion);
-
-                while(resultSet.next()) {
-                    id_sesion = resultSet.getInt("id_sesion");
-                    System.out.println(id_sesion);
-                }
-
-                String getNombreAlumno = "SELECT id FROM sf_guard_user WHERE nombres= '"+SeleccionarAlumno.nombre_alumno+"' AND apellido_paterno = '"+
-                        SeleccionarAlumno.apellido_pa_alumno+"'";
-
-                Statement statement1 = connection.prepareStatement(getNombreAlumno);
-                ResultSet resultSet1 = statement1.executeQuery(getNombreAlumno);
-
-                while(resultSet1.next()) {
-                    id_pertenece = resultSet1.getInt("id");
-                    System.out.println("id_pertenece_alumno)=="+id_pertenece);
-                }
-
-                String getId = "SELECT id FROM PERTENECE_reim WHERE sf_guard_user_id="+id_pertenece+"";
-                Statement statement2 = connection.prepareStatement(getId);
-                ResultSet resultSet2 = statement2.executeQuery(getId);
-
-
-                while(resultSet2.next()) {
-                    id_pertenece_tabla = resultSet2.getInt("id");
-                }
-                System.out.println("id_pertenece_tabla=="+id_pertenece_tabla);
-                System.out.println("contador clicks mapa: "+contadorClickMapa);
-                System.out.println("contador instrucciones: "+contadorClickInstrucciones);
-
-                PreparedStatement setSesion = connection.prepareStatement("UPDATE ASIGNA_REALIZAR_SESION" +
-                        " SET datetime_termino_sesion = ?, contador_click_mapa = ?, contador_click_instrucciones = ? " +
-                        "WHERE id_sesion = "+id_sesion);
-                setSesion.setTimestamp(1, Timestamp.valueOf(fechaTerminoSesion));
-                setSesion.setInt(2, contadorClickMapa);
-                setSesion.setInt(3, contadorClickInstrucciones);
-                setSesion.execute();
-                setSesion.close();
-                isSuccess = true;
-
-            } catch (ClassNotFoundException | SQLException e) {
-                e.printStackTrace();
-                isSuccess = false;
-            }
-            return null;
-        }
     }
 
 }

@@ -12,6 +12,9 @@ import android.widget.ImageView;
 public class Bienvenida extends Activity {
 
     ImageView imageView;
+    final int valorGamificacion = 0;
+    final int contadorClickMapa = 0;
+    final int contadorClickInstrucciones = 0;
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -53,7 +56,11 @@ public class Bienvenida extends Activity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        startActivity(new Intent(getApplicationContext(), Login.class));
+                        Intent intent = new Intent(Bienvenida.this, MapaOeste.class);
+                        intent.putExtra("CONTADOR_CLICK_MAPA", contadorClickMapa);
+                        intent.putExtra("CONTADOR_CLICK_INSTRUCCIONES", contadorClickInstrucciones);
+                        intent.putExtra("VALOR_GAMIFICACION", valorGamificacion);
+                        startActivity(intent);
                         finish();
                     }
                 }, 1000);

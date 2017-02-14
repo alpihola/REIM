@@ -3,22 +3,24 @@ package com.alpi.android.REIM.helper;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
 /**
- * Interface to notify an item ViewHolder of relevant callbacks from {@link
- * android.support.v7.widget.helper.ItemTouchHelper.Callback}.
- *
- */
+* Interfaz para notificar al ViewHolder de un item sobre algún callback relevante desde
+* {@link android.support.v7.widget.helper.ItemTouchHelper.Callback}.
+**/
+
 public interface ItemTouchHelperViewHolder {
 
     /**
-     * Called when the {@link ItemTouchHelper} first registers an item as being moved or swiped.
-     * Implementations should update the item view to indicate it's active state.
+     * Llamado cuando el {@link ItemTouchHelper} registra un primer movimiento o swap de un item.
+     * Implementaciones deberían actualizar la vista del item para indicar su estado activo.
      */
+
     void onItemSelected();
 
-
     /**
-     * Called when the {@link ItemTouchHelper} has completed the move or swipe, and the active item
-     * state should be cleared.
+     * Llamado cuando el {@link ItemTouchHelper} ha completado un swipe y el estado de un item
+     * activo debe ser despejado.
      */
+
     void onItemClear();
+
 }
